@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<!-- saved from url=(0210)file:///C:/Users/kurt.dierick/OneDrive%20-%20Praesidiad%20Limited/Preventie%20dienst/welzijn/2%20Personeel/01%20Instructies%20-%20onthaal/voorschriften/FM/Betafence%20%E2%80%93%20Werkvergunningen%20Toolbox.html -->
+<html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betafence – Werkvergunningen Toolbox</title>
+<style>
+  :root {
+    --blauw-donker: #1F3864;
+    --blauw-midden: #2E5FA3;
+    --blauw-licht: #DCE9F5;
+    --blauw-tabel: #153D63;
+    --grijs: #D9D9D9;
+    --wit: #ffffff;
+    --tekst-donker: #1a1a2e;
+    --tekst-grijs: #5a6070;
+    --rood-accent: #c0392b;
+    --groen: #1e7e34;
+    --oranje: #d4860a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: var(--tekst-donker); font-size: 14px; }
+
+  /* ── HEADER ── */
+  .app-header {
+    background: var(--blauw-donker);
+    color: white;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    min-height: 64px;
+    border-bottom: 3px solid var(--blauw-midden);
+  }
+  .header-logo {
+    background: var(--blauw-tabel);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .header-logo svg { width: 36px; height: 36px; }
+  .header-logo span { font-size: 18px; font-weight: 700; letter-spacing: 1px; color: white; }
+  .header-title {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .header-title h1 { font-size: 15px; font-weight: 600; color: white; }
+  .header-title p { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+
+  /* ── STAPPEN INDICATOR ── */
+  .steps-bar {
+    background: white;
+    border-bottom: 1px solid var(--grijs);
+    padding: 0 20px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--tekst-grijs);
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    cursor: default;
+    transition: all 0.2s;
+  }
+  .step-item.active { color: var(--blauw-midden); border-bottom-color: var(--blauw-midden); font-weight: 600; }
+  .step-item.done { color: var(--groen); }
+  .step-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--grijs);
+    color: var(--tekst-grijs);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-item.active .step-num { background: var(--blauw-midden); color: white; }
+  .step-item.done .step-num { background: var(--groen); color: white; }
+
+  /* ── MAIN LAYOUT ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  /* ── SCHERM / PAGINA ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── KAARTEN ── */
+  .card {
+    background: white;
+    border: 1px solid var(--grijs);
+    border-radius: 6px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .card-header {
+    background: var(--blauw-donker);
+    color: white;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-header .badge {
+    background: var(--blauw-midden);
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: auto;
+  }
+  .card-body { padding: 16px; }
+
+  /* ── VERGUNNING SELECTIE ── */
+  .verg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .verg-btn {
+    border: 1.5px solid var(--grijs);
+    background: white;
+    border-radius: 6px;
+    padding: 12px 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .verg-btn:hover { border-color: var(--blauw-midden); background: var(--blauw-licht); }
+  .verg-btn.selected { border-color: var(--blauw-midden); background: var(--blauw-licht); box-shadow: 0 0 0 2px var(--blauw-midden); }
+  .verg-btn .verg-naam { font-size: 12px; font-weight: 600; color: var(--blauw-donker); }
+  .verg-btn .verg-fm { font-size: 10px; color: var(--tekst-grijs); }
+  .verg-btn .verg-icon { font-size: 20px; margin-bottom: 4px; }
+  .verg-btn.vereist { border-color: var(--grijs); }
+  .verg-btn.vereist .verg-naam::after { content: ' *'; color: var(--rood-accent); }
+
+  /* ── FORMULIER VELDEN ── */
+  .form-group { margin-bottom: 12px; }
+  .form-label { font-size: 12px; font-weight: 600; color: var(--blauw-donker); margin-bottom: 4px; display: block; }
+  .form-label .req { color: var(--rood-accent); }
+  input[type="text"], input[type="date"], input[type="time"], input[type="email"], textarea, select {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 7px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--tekst-donker);
+    background: white;
+  }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--blauw-midden); border-color: var(--blauw-midden); }
+  textarea { min-height: 60px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  /* ── CHECKLIST ── */
+  .check-tabel { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .check-tabel th { background: var(--blauw-donker); color: white; padding: 7px 10px; text-align: left; font-size: 11px; font-weight: 600; }
+  .check-tabel td { padding: 7px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .check-tabel tr:nth-child(even) td { background: #f8fafc; }
+  .check-tabel .label-cel { color: var(--tekst-donker); font-size: 12px; line-height: 1.4; }
+  .radio-group { display: flex; gap: 10px; align-items: center; }
+  .radio-group label { display: flex; align-items: center; gap: 4px; cursor: pointer; font-size: 12px; white-space: nowrap; }
+  .radio-group input[type="radio"] { accent-color: var(--blauw-midden); }
+  .check-sectie-header td { background: var(--blauw-licht) !important; font-weight: 600; color: var(--blauw-donker); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── HANDTEKENING ── */
+  .handtekening-blok {
+    border: 1px solid var(--grijs);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .handtekening-header {
+    background: var(--blauw-licht);
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blauw-donker);
+    border-bottom: 1px solid var(--grijs);
+  }
+  .handtekening-body { padding: 12px; }
+  .tekenveld-wrap { position: relative; margin-top: 8px; }
+  canvas.tekenveld {
+    border: 1px dashed #aaa;
+    border-radius: 4px;
+    width: 100%;
+    height: 120px;
+    display: block;
+    cursor: crosshair;
+    background: #fafafa;
+    touch-action: none;
+  }
+  .wis-btn {
+    position: absolute;
+    top: 6px; right: 6px;
+    background: white;
+    border: 1px solid var(--grijs);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--tekst-grijs);
+  }
+  .wis-btn:hover { background: #f8f8f8; border-color: #aaa; }
+  .handtekening-tabs { display: flex; border-bottom: 1px solid var(--grijs); }
+  .htab {
+    padding: 6px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--tekst-grijs);
+    border-bottom: 2px solid transparent;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    transition: all 0.15s;
+  }
+  .htab.active { color: var(--blauw-midden); border-bottom-color: var(--blauw-midden); font-weight: 600; }
+  .htab-content { display: none; padding: 10px 0; }
+  .htab-content.active { display: block; }
+
+  /* ── NAVIGATIE KNOPPEN ── */
+  .nav-knoppen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  .btn {
+    padding: 9px 20px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+  }
+  .btn-primary { background: var(--blauw-midden); color: white; }
+  .btn-primary:hover { background: var(--blauw-donker); }
+  .btn-secondary { background: white; color: var(--blauw-donker); border: 1.5px solid var(--blauw-midden); }
+  .btn-secondary:hover { background: var(--blauw-licht); }
+  .btn-success { background: var(--groen); color: white; }
+  .btn-success:hover { background: #155a25; }
+  .btn-danger { background: var(--rood-accent); color: white; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* ── RECAP / OVERZICHT ── */
+  .recap-sectie { margin-bottom: 14px; }
+  .recap-label { font-size: 11px; color: var(--tekst-grijs); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .recap-waarde { font-size: 13px; color: var(--tekst-donker); }
+  .recap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; }
+  .vergunning-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--blauw-licht);
+    color: var(--blauw-donker);
+    border: 1px solid var(--blauw-midden);
+    border-radius: 12px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 2px 2px;
+  }
+
+  /* ── BEVESTIGING SCHERM ── */
+  .bevestiging-icon { font-size: 48px; text-align: center; margin: 20px 0 10px; }
+  .bevestiging-titel { text-align: center; font-size: 18px; font-weight: 700; color: var(--groen); margin-bottom: 6px; }
+  .bevestiging-sub { text-align: center; font-size: 13px; color: var(--tekst-grijs); margin-bottom: 20px; }
+  .mailto-box {
+    background: var(--blauw-licht);
+    border: 1px solid var(--blauw-midden);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+  .mailto-box h3 { font-size: 13px; font-weight: 600; color: var(--blauw-donker); margin-bottom: 10px; }
+
+  /* ── WAARSCHUWING ── */
+  .alert {
+    padding: 10px 14px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .alert-info { background: #e8f4fd; border-left: 3px solid var(--blauw-midden); color: #1a4a7a; }
+  .alert-warning { background: #fff8e6; border-left: 3px solid var(--oranje); color: #7a4800; }
+  .alert-danger { background: #fef0f0; border-left: 3px solid var(--rood-accent); color: #7a0000; }
+
+  /* ── PBM GRID ── */
+  .pbm-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .pbm-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--grijs);
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 11px;
+    background: white;
+    transition: all 0.12s;
+    user-select: none;
+  }
+  .pbm-item.checked { background: var(--blauw-licht); border-color: var(--blauw-midden); color: var(--blauw-donker); font-weight: 600; }
+  .pbm-item input { accent-color: var(--blauw-midden); }
+
+  /* ── SECTIE DIVIDER ── */
+  .sectie-divider {
+    border-top: 2px solid var(--blauw-licht);
+    margin: 16px 0 12px;
+    padding-top: 12px;
+  }
+  .sectie-divider-titel { font-size: 12px; font-weight: 700; color: var(--blauw-donker); text-transform: uppercase; letter-spacing: 0.6px; }
+
+  @media (max-width: 600px) {
+    .verg-grid { grid-template-columns: 1fr; }
+    .form-row, .form-row-3 { grid-template-columns: 1fr; }
+    .recap-grid { grid-template-columns: 1fr; }
+  }
+
+  .print-doc { display: block; }
+
+  /* PRINT */
+  @media print {
+    body { background: white; font-size: 11px; color: #000; }
+    .nav-knoppen, .steps-bar, .app-header, #screen1, #screen2,
+    #screen3, #screen4, #screen5, #screen6,
+    .card:has(#overzicht-inhoud) .card-header + .card-body > .alert,
+    #screen7 .card:nth-child(2), #screen7 .nav-knoppen { display: none !important; }
+    #screen7 { display: block !important; }
+    .main { padding: 0; max-width: 100%; }
+    .card { border: 1px solid #ccc; margin-bottom: 10px; break-inside: avoid; box-shadow: none; }
+    .card-header { background: #1F3864 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 6px 12px; font-size: 11px; }
+    .print-doc { display: block !important; }
+    .vergunning-chip { background: #DCE9F5 !important; border: 1px solid #2E5FA3 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .print-tabel { width: 100%; border-collapse: collapse; font-size: 10px; margin-bottom: 6px; }
+    .print-tabel th { background: #1F3864 !important; color: white !important; padding: 4px 8px; text-align: left; font-size: 10px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .print-tabel td { padding: 4px 8px; border-bottom: 1px solid #eee; vertical-align: top; }
+    .print-tabel tr:nth-child(even) td { background: #f8fafc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .print-sectie-header { background: #DCE9F5 !important; font-weight: 700; font-size: 10px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .print-ht-canvas { max-width: 280px; height: 60px; border: 1px solid #ccc; display: block; }
+    .recap-grid { grid-template-columns: 1fr 1fr; }
+    .recap-label { font-size: 10px; }
+    .recap-waarde { font-size: 11px; }
+    .sectie-divider { margin: 8px 0 6px; padding-top: 6px; }
+    .sectie-divider-titel { font-size: 10px; }
+    @page { margin: 15mm 12mm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="app-header">
+  <div class="header-logo">
+    <svg viewBox="0 0 40 40" fill="none">
+      <rect width="40" height="40" rx="4" fill="#2E5FA3"></rect>
+      <rect x="6" y="8" width="28" height="3" rx="1.5" fill="white"></rect>
+      <rect x="6" y="14" width="20" height="3" rx="1.5" fill="white"></rect>
+      <rect x="6" y="20" width="28" height="3" rx="1.5" fill="white"></rect>
+      <rect x="6" y="26" width="16" height="3" rx="1.5" fill="white"></rect>
+      <rect x="24" y="24" width="10" height="10" rx="5" fill="#1F3864"></rect>
+      <path d="M26 29l2 2 4-3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <span>BETAFENCE</span>
+  </div>
+  <div class="header-title">
+    <h1>Werkvergunningen Toolbox</h1>
+    <p>Voorbereiding werken met derden – Zwevegem</p>
+  </div>
+</div>
+
+<!-- STAPPEN -->
+<div class="steps-bar">
+  <div class="step-item done" id="step1-ind"><span class="step-num">1</span> Algemene info</div>
+  <div class="step-item done" id="step2-ind"><span class="step-num">2</span> Vergunningen</div>
+  <div class="step-item done" id="step3-ind"><span class="step-num">3</span> Specifieke risico's</div>
+  <div class="step-item done" id="step4-ind"><span class="step-num">4</span> Toolbox checklist</div>
+  <div class="step-item done" id="step5-ind"><span class="step-num">5</span> PBM's &amp; maatregelen</div>
+  <div class="step-item done" id="step6-ind"><span class="step-num">6</span> Handtekeningen</div>
+  <div class="step-item active" id="step7-ind"><span class="step-num">7</span> Overzicht &amp; mail</div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════════════════════════════════
+     SCHERM 1 – ALGEMENE INFORMATIE
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen1">
+  <div class="card">
+    <div class="card-header">📋 Algemene werkvergunning – Basisgegevens <span class="badge">FM.100.353</span></div>
+    <div class="card-body">
+      <div class="alert alert-info">💡 De algemene werkvergunning is altijd verplicht. Specifieke vergunningen worden in stap 2 geselecteerd.</div>
+      <div class="form-group">
+        <label class="form-label">Project / opdracht – korte omschrijving werkzaamheden <span class="req">*</span></label>
+        <textarea id="f-opdracht" rows="2" placeholder="Bijv. plaatsen nieuwe HVAC-unit hal 3, dakbedekking vernieuwen…"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Afdeling / subafdeling <span class="req">*</span></label>
+          <input type="text" id="f-afdeling" placeholder="Bijv. Sliding Gates – Hal 5">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Werkzone <span class="req">*</span></label>
+          <input type="text" id="f-werkzone" placeholder="Bijv. Hal 3 – dak noordzijde">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Aanvangsdatum <span class="req">*</span></label>
+          <input type="date" id="f-datum-start">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Voorziene einddatum</label>
+          <input type="date" id="f-datum-einde">
+        </div>
+      </div>
+      <div class="sectie-divider"><div class="sectie-divider-titel">Betrokken personen</div></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Werfleider / installatieverantwoordelijke Betafence <span class="req">*</span></label>
+          <input type="text" id="f-werfleider" placeholder="Naam + functie">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Werkverantwoordelijke aannemer <span class="req">*</span></label>
+          <input type="text" id="f-werkverantwoordelijke" placeholder="Naam + functie + firma">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Firma / aannemer <span class="req">*</span></label>
+          <input type="text" id="f-firma" placeholder="Naam aannemende firma">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Voorman op de werf</label>
+          <input type="text" id="f-voorman" placeholder="Naam voorman">
+        </div>
+      </div>
+      <div class="sectie-divider"><div class="sectie-divider-titel">Contactgegevens voor mailing</div></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">E-mail werfleider Betafence <span class="req">*</span></label>
+          <input type="email" id="f-mail-betafence" placeholder="naam@betafence.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail verantwoordelijke aannemer <span class="req">*</span></label>
+          <input type="email" id="f-mail-aannemer" placeholder="naam@firma.be">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Extra ontvangers (CC) – komma-gescheiden</label>
+        <input type="text" id="f-mail-cc" placeholder="preventie@betafence.com, veiligheid@firma.be">
+      </div>
+    </div>
+  </div>
+  <div class="nav-knoppen">
+    <div></div>
+    <button class="btn btn-primary" onclick="naarStap(2)">Volgende: Vergunningen selecteren →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCHERM 2 – VERGUNNINGEN SELECTIE
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen2">
+  <div class="card">
+    <div class="card-header">🔐 Selecteer van toepassing zijnde werkvergunningen</div>
+    <div class="card-body">
+      <div class="alert alert-warning">⚠️ De <strong>Algemene werkvergunning (FM.100.353)</strong> is altijd vereist en wordt automatisch opgenomen. Selecteer bijkomende vergunningen die van toepassing zijn op de geplande werken.</div>
+      <div class="verg-grid">
+        <div class="verg-btn vereist selected" id="vb-353" style="opacity:0.7; cursor:default;">
+          <div class="verg-icon">📋</div>
+          <div class="verg-naam">Algemene werkvergunning</div>
+          <div class="verg-fm">FM.100.353 – Altijd verplicht</div>
+        </div>
+        <div class="verg-btn" id="vb-321" onclick="toggleVerg(&#39;321&#39;, this)">
+          <div class="verg-icon">🔥</div>
+          <div class="verg-naam">Vuurvergunning</div>
+          <div class="verg-fm">FM.100.321 – Lassen, slijpen, open vlam</div>
+        </div>
+        <div class="verg-btn" id="vb-350" onclick="toggleVerg(&#39;350&#39;, this)">
+          <div class="verg-icon">☣️</div>
+          <div class="verg-naam">Asbest</div>
+          <div class="verg-fm">FM.100.350 – Werken aan asbestmaterialen</div>
+        </div>
+        <div class="verg-btn" id="vb-351" onclick="toggleVerg(&#39;351&#39;, this)">
+          <div class="verg-icon">🏗️</div>
+          <div class="verg-naam">Dakwerken</div>
+          <div class="verg-fm">FM.100.351 – Alle werken op dak</div>
+        </div>
+        <div class="verg-btn" id="vb-352" onclick="toggleVerg(&#39;352&#39;, this)">
+          <div class="verg-icon">🪜</div>
+          <div class="verg-naam">Werken op hoogte</div>
+          <div class="verg-fm">FM.100.352 – Tijdelijke hoogte-werkzaamheden</div>
+        </div>
+        <div class="verg-btn" id="vb-354" onclick="toggleVerg(&#39;354&#39;, this)">
+          <div class="verg-icon">🕳️</div>
+          <div class="verg-naam">Besloten ruimte</div>
+          <div class="verg-fm">FM.100.354 – Betreden besloten ruimte</div>
+        </div>
+        <div class="verg-btn" id="vb-355" onclick="toggleVerg(&#39;355&#39;, this)">
+          <div class="verg-icon">⚡</div>
+          <div class="verg-naam">Elektrische installaties</div>
+          <div class="verg-fm">FM.100.355 – Alle elektrische werken</div>
+        </div>
+        <div class="verg-btn" id="vb-356" onclick="toggleVerg(&#39;356&#39;, this)">
+          <div class="verg-icon">💥</div>
+          <div class="verg-naam">Gezoneerde ruimte (ATEX)</div>
+          <div class="verg-fm">FM.100.356 – Explosiegevaarlijke zones</div>
+        </div>
+        <div class="verg-btn" id="vb-357" onclick="toggleVerg(&#39;357&#39;, this)">
+          <div class="verg-icon">⛏️</div>
+          <div class="verg-naam">Graafwerken</div>
+          <div class="verg-fm">FM.100.357 – Alle graafwerken</div>
+        </div>
+        <div class="verg-btn" id="vb-358" onclick="toggleVerg(&#39;358&#39;, this)">
+          <div class="verg-icon">⚠️</div>
+          <div class="verg-naam">Overige risicovolle taken</div>
+          <div class="verg-fm">FM.100.358 – Niet elders gedekt</div>
+        </div>
+        <div class="verg-btn" id="vb-359" onclick="toggleVerg(&#39;359&#39;, this)">
+          <div class="verg-icon">🔧</div>
+          <div class="verg-naam">Nutsvoorzieningen</div>
+          <div class="verg-fm">FM.100.359 – Gas, water, elektriciteit, sprinkler…</div>
+        </div>
+      </div>
+      <div id="verg-waarschuwingen" style="margin-top:12px;"></div>
+    </div>
+  </div>
+  <div class="nav-knoppen">
+    <button class="btn btn-secondary" onclick="naarStap(1)">← Terug</button>
+    <button class="btn btn-primary" onclick="naarStap(3)">Volgende: Specifieke risico's →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCHERM 3 – SPECIFIEKE RISICO'S (FM.100.320)
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen3">
+  <div class="card">
+    <div class="card-header">📊 Melding specifieke risico's <span class="badge">FM.100.320</span></div>
+    <div class="card-body">
+      <div class="alert alert-info">📋 Vul aan welke specifieke risico's van toepassing zijn. Meerdere risico's kunnen van toepassing zijn.</div>
+      <div class="form-group">
+        <label class="form-label">Specifieke beschrijving project / uit te voeren werk</label>
+        <textarea id="f-spec-project" rows="2" placeholder="Korte aanvullende omschrijving specifieke risico&#39;s voor dit project…"></textarea>
+      </div>
+      <table class="check-tabel">
+        <thead><tr><th style="width:55%">Risicocategorie</th><th>Bijzonderheden</th></tr></thead>
+        <tbody>
+          <tr><td class="label-cel">🔥 Brandpreventie – werken met open vlam</td><td><input type="text" id="r-brand" placeholder="Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">🕳️ Werken in besloten ruimtes</td><td><input type="text" id="r-besloten" placeholder="Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">🪜 Werken in de hoogte (verankeringspunten, …)</td><td><input type="text" id="r-hoogte" placeholder="Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">🏗️ Werken op daken</td><td><input type="text" id="r-dak" placeholder="Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">☣️ Asbesthoudende materialen</td><td><input type="text" id="r-asbest" placeholder="Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">⚗️ Schadelijke stoffen (basen, zuren, lood, gassen, …)</td><td><input type="text" id="r-stoffen" placeholder="Naam + gevarensymbool of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">💥 Werken in gezoneerde ruimtes (ATEX)</td><td><input type="text" id="r-atex" placeholder="Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">⚡ Werken in/nabij HS/LS cabines</td><td><input type="text" id="r-elek" placeholder="BA4/BA5 vereist? Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">🔊 Lawaai / stof / geur</td><td><input type="text" id="r-lawaai" placeholder="Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">📡 Indringingsrisico kanalen / putten</td><td><input type="text" id="r-kanalen" placeholder="Omschrijving of &#39;nvt&#39;"></td></tr>
+          <tr><td class="label-cel">👥 Betafencemedewerkers / andere externen in de omgeving</td><td><input type="text" id="r-mede" placeholder="Omschrijving afstemming of &#39;nvt&#39;"></td></tr>
+        </tbody>
+      </table>
+      <div class="sectie-divider"><div class="sectie-divider-titel">Risico's die de aannemer binnenbrengt</div></div>
+      <div class="form-group">
+        <label class="form-label">Risico's die de aannemer-zelfstandige bij Betafence binnenbrengt</label>
+        <textarea id="r-aannemer-risicos" rows="2" placeholder="Door aannemer mee te delen: eigen materieel, gevaarlijke producten, methoden… of &#39;Nihil&#39;"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="nav-knoppen">
+    <button class="btn btn-secondary" onclick="naarStap(2)">← Terug</button>
+    <button class="btn btn-primary" onclick="naarStap(4)">Volgende: Toolbox checklist →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCHERM 4 – TOOLBOX CHECKLIST (FM.100.322)
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen4">
+  <div class="card">
+    <div class="card-header">✅ Checklijst werken met derden – Toolbox <span class="badge">FM.100.322</span></div>
+    <div class="card-body">
+      <div class="alert alert-info">📋 Bespreek alle punten tijdens de toolbox. Zet op JA/NEEN of NVT.</div>
+      <table class="check-tabel">
+        <thead><tr><th style="width:60%">Controlepunt</th><th>Beoordeling</th></tr></thead>
+        <tbody>
+          <tr class="check-sectie-header"><td colspan="2">🔴 Verplichte documenten &amp; risicobeoordeling</td></tr>
+          <tr><td class="label-cel">RA (risicobeoordeling) gemaakt?</td><td><div class="radio-group"><label><input type="radio" name="c-ra" value="ja">Ja</label><label><input type="radio" name="c-ra" value="neen">Neen</label></div></td></tr>
+          <tr><td class="label-cel">DO 100325 (registratiefiche) getekend door aannemer?</td><td><div class="radio-group"><label><input type="radio" name="c-do" value="ja">Ja</label><label><input type="radio" name="c-do" value="neen">Neen</label><label><input type="radio" name="c-do" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Aannemer op de hoogte van onze risico's?</td><td><div class="radio-group"><label><input type="radio" name="c-risicos" value="ja">Ja</label><label><input type="radio" name="c-risicos" value="neen">Neen</label></div></td></tr>
+          <tr><td class="label-cel">PBM's aannemer conform minimumvereisten? (V-schoenen, lange broek, fluo hesje, V-bril, stootpet)</td><td><div class="radio-group"><label><input type="radio" name="c-pbm" value="ja">Ja</label><label><input type="radio" name="c-pbm" value="neen">Neen</label></div></td></tr>
+          <tr class="check-sectie-header"><td colspan="2">📍 Ontvangst &amp; oriëntatie</td></tr>
+          <tr><td class="label-cel">Aanmeld-/afmeldprocedure toegelicht?</td><td><div class="radio-group"><label><input type="radio" name="c-aanmeld" value="ja">Ja</label><label><input type="radio" name="c-aanmeld" value="neen">Neen</label></div></td></tr>
+          <tr><td class="label-cel">Locatie kleedzaal, sanitair, eetplaats meegedeeld?</td><td><div class="radio-group"><label><input type="radio" name="c-kleed" value="ja">Ja</label><label><input type="radio" name="c-kleed" value="neen">Neen</label></div></td></tr>
+          <tr><td class="label-cel">Parkeerplaats voertuigen aangeduid?</td><td><div class="radio-group"><label><input type="radio" name="c-park" value="ja">Ja</label><label><input type="radio" name="c-park" value="neen">Neen</label></div></td></tr>
+          <tr><td class="label-cel">Noodnummer 0473/13 45 98 &amp; evacuatieplaats meegedeeld?</td><td><div class="radio-group"><label><input type="radio" name="c-nood" value="ja">Ja</label><label><input type="radio" name="c-nood" value="neen">Neen</label></div></td></tr>
+          <tr class="check-sectie-header"><td colspan="2">⚠️ Risico's besproken</td></tr>
+          <tr><td class="label-cel">Brand: vuurvergunning ok? Maatregelen uitgevoerd?</td><td><div class="radio-group"><label><input type="radio" name="c-tbrand" value="ja">Ja</label><label><input type="radio" name="c-tbrand" value="neen">Neen</label><label><input type="radio" name="c-tbrand" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Aanrijding: werkzone afgebakend? Omleiding voorzien?</td><td><div class="radio-group"><label><input type="radio" name="c-aanrij" value="ja">Ja</label><label><input type="radio" name="c-aanrij" value="neen">Neen</label><label><input type="radio" name="c-aanrij" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Electrocutie: LOTO uitgevoerd? Wie schakelt?</td><td><div class="radio-group"><label><input type="radio" name="c-loto" value="ja">Ja</label><label><input type="radio" name="c-loto" value="neen">Neen</label><label><input type="radio" name="c-loto" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Openingen in de vloer afgeschermd?</td><td><div class="radio-group"><label><input type="radio" name="c-open" value="ja">Ja</label><label><input type="radio" name="c-open" value="neen">Neen</label><label><input type="radio" name="c-open" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Maatregelen tegen vallen ok?</td><td><div class="radio-group"><label><input type="radio" name="c-val" value="ja">Ja</label><label><input type="radio" name="c-val" value="neen">Neen</label><label><input type="radio" name="c-val" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Vreemde chemische producten? SDS aanwezig?</td><td><div class="radio-group"><label><input type="radio" name="c-sds" value="ja">Ja</label><label><input type="radio" name="c-sds" value="neen">Neen</label><label><input type="radio" name="c-sds" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Asbestplan geraadpleegd?</td><td><div class="radio-group"><label><input type="radio" name="c-asb" value="ja">Ja</label><label><input type="radio" name="c-asb" value="neen">Neen</label><label><input type="radio" name="c-asb" value="nvt">NVT</label></div></td></tr>
+          <tr class="check-sectie-header"><td colspan="2">🔧 Hulpgereedschap &amp; arbeidsmiddelen</td></tr>
+          <tr><td class="label-cel">Heftruck: keuring ok, opleiding ok, instructies gegeven?</td><td><div class="radio-group"><label><input type="radio" name="c-heft" value="ja">Ja</label><label><input type="radio" name="c-heft" value="neen">Neen</label><label><input type="radio" name="c-heft" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Hoogtewerker: keuring ok, opleiding ok, instructies gegeven?</td><td><div class="radio-group"><label><input type="radio" name="c-hwer" value="ja">Ja</label><label><input type="radio" name="c-hwer" value="neen">Neen</label><label><input type="radio" name="c-hwer" value="nvt">NVT</label></div></td></tr>
+          <tr><td class="label-cel">Verreiker: keuring ok, opleiding ok, instructies gegeven?</td><td><div class="radio-group"><label><input type="radio" name="c-verr" value="ja">Ja</label><label><input type="radio" name="c-verr" value="neen">Neen</label><label><input type="radio" name="c-verr" value="nvt">NVT</label></div></td></tr>
+          <tr class="check-sectie-header"><td colspan="2">🏭 Nutsvoorzieningen betrokken</td></tr>
+          <tr><td class="label-cel">Elektriciteit – betrokken bij de werken?</td><td><div class="radio-group"><label><input type="radio" name="c-nuts-elek" value="ja">Ja</label><label><input type="radio" name="c-nuts-elek" value="neen">Neen</label></div></td></tr>
+          <tr><td class="label-cel">Gas – betrokken bij de werken?</td><td><div class="radio-group"><label><input type="radio" name="c-nuts-gas" value="ja">Ja</label><label><input type="radio" name="c-nuts-gas" value="neen">Neen</label></div></td></tr>
+          <tr><td class="label-cel">Water / sprinkler – betrokken bij de werken?</td><td><div class="radio-group"><label><input type="radio" name="c-nuts-water" value="ja">Ja</label><label><input type="radio" name="c-nuts-water" value="neen">Neen</label></div></td></tr>
+          <tr><td class="label-cel">Perslucht / stoom – betrokken bij de werken?</td><td><div class="radio-group"><label><input type="radio" name="c-nuts-lucht" value="ja">Ja</label><label><input type="radio" name="c-nuts-lucht" value="neen">Neen</label></div></td></tr>
+        </tbody>
+      </table>
+      <div class="form-group" style="margin-top:12px;">
+        <label class="form-label">Opmerkingen toolbox / situatieschets</label>
+        <textarea id="f-toolbox-opmerking" rows="3" placeholder="Bijv. aandachtspunten, specifieke afspraken, situatieschets beschrijving…"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="nav-knoppen">
+    <button class="btn btn-secondary" onclick="naarStap(3)">← Terug</button>
+    <button class="btn btn-primary" onclick="naarStap(5)">Volgende: PBM's &amp; maatregelen →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCHERM 5 – PBM's & EXTRA MAATREGELEN
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen5">
+  <div class="card">
+    <div class="card-header">🦺 Te gebruiken PBM's &amp; extra voorzieningen</div>
+    <div class="card-body">
+      <div class="form-group">
+        <label class="form-label">Verplichte PBM's voor deze werken</label>
+        <div class="pbm-grid" id="pbm-grid">
+          <label class="pbm-item"><input type="checkbox" value="Veiligheidsbril"> Veiligheidsbril</label>
+          <label class="pbm-item"><input type="checkbox" value="Veiligheidsschoenen"> Veiligheidsschoenen</label>
+          <label class="pbm-item"><input type="checkbox" value="Lange broek"> Lange broek</label>
+          <label class="pbm-item"><input type="checkbox" value="Fluo hesje/jas"> Fluo hesje/jas</label>
+          <label class="pbm-item"><input type="checkbox" value="Stofmasker"> Stofmasker</label>
+          <label class="pbm-item"><input type="checkbox" value="Gehoorbescherming"> Gehoorbescherming</label>
+          <label class="pbm-item"><input type="checkbox" value="Lange mouwen"> Lange mouwen</label>
+          <label class="pbm-item"><input type="checkbox" value="Handschoenen"> Handschoenen</label>
+          <label class="pbm-item"><input type="checkbox" value="Helm/stootpet"> Helm/stootpet</label>
+          <label class="pbm-item"><input type="checkbox" value="Gelaatsscherm"> Gelaatsscherm</label>
+          <label class="pbm-item"><input type="checkbox" value="Veiligheidsharnas"> Veiligheidsharnas</label>
+          <label class="pbm-item"><input type="checkbox" value="Adembescherming FFP3"> Adembescherming FFP3</label>
+          <label class="pbm-item"><input type="checkbox" value="Chemisch-resistente overall"> Chemisch-resistente overall</label>
+          <label class="pbm-item"><input type="checkbox" value="Reddingslijn"> Reddingslijn</label>
+          <label class="pbm-item"><input type="checkbox" value="Nitril handschoenen"> Nitril handschoenen</label>
+          <label class="pbm-item"><input type="checkbox" value="Rubberlazen"> Rubberlaarzen</label>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:8px;">
+        <label class="form-label">Type handschoenen (indien van toepassing)</label>
+        <input type="text" id="f-handschoenen-type" placeholder="Bijv. nitril, leder snijresistent, chemisch bestendig…">
+      </div>
+      <div class="sectie-divider"><div class="sectie-divider-titel">Afbakening &amp; extra instructies</div></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Afbakening werkzone noodzakelijk?</label>
+          <div class="radio-group" style="margin-top:6px;">
+            <label><input type="radio" name="afbakening" value="ja"> Ja</label>
+            <label><input type="radio" name="afbakening" value="neen"> Neen</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Schriftelijke instructies noodzakelijk?</label>
+          <div class="radio-group" style="margin-top:6px;">
+            <label><input type="radio" name="instructies" value="ja"> Ja</label>
+            <label><input type="radio" name="instructies" value="neen"> Neen</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Specifieke preventiemaatregelen / bijkomende opmerkingen</label>
+        <textarea id="f-maatregelen" rows="3" placeholder="Bijv. afbakening met lint en borden, LOTO-procedure nr.…, verplicht BA5 aanwezig…"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Chemische producten aanwezig / te gebruiken?</label>
+        <textarea id="f-chemisch" rows="2" placeholder="Naam product + gevarensymbool, of &#39;Geen&#39;"></textarea>
+      </div>
+      <div class="alert alert-warning" style="margin-top:8px;">⚠️ Indien chemische producten aanwezig zijn, dient de VIK – Chemische agentia – gevaarsymbolen overhandigd te worden aan de werknemer(s).</div>
+    </div>
+  </div>
+  <div class="nav-knoppen">
+    <button class="btn btn-secondary" onclick="naarStap(4)">← Terug</button>
+    <button class="btn btn-primary" onclick="naarStap(6)">Volgende: Handtekeningen →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCHERM 6 – HANDTEKENINGEN
+═══════════════════════════════════════════════════ -->
+<div class="screen" id="screen6">
+  <div class="card">
+    <div class="card-header">✍️ Handtekeningen – Toolbox afsluitend akkoord</div>
+    <div class="card-body">
+      <div class="alert alert-info">📋 De werkverantwoordelijke verklaart hierbij alle bovenvermelde specifieke informatie en vergunningen ontvangen en begrepen te hebben.</div>
+
+      <!-- Handtekening 1: Werfleider Betafence -->
+      <div class="handtekening-blok">
+        <div class="handtekening-header">🏢 Werfleider / Installatieverantwoordelijke – Betafence</div>
+        <div class="handtekening-body">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Naam</label><input type="text" id="ht1-naam" placeholder="Voornaam + Naam"></div>
+            <div class="form-group"><label class="form-label">Functie</label><input type="text" id="ht1-functie" placeholder="Bijv. Werfleider, Afdelingsverantwoordelijke"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Datum</label><input type="date" id="ht1-datum"></div>
+            <div class="form-group"><label class="form-label">Tijdstip</label><input type="time" id="ht1-tijd"></div>
+          </div>
+          <div class="handtekening-tabs">
+            <button class="htab active" onclick="switchTab(&#39;ht1&#39;,&#39;teken&#39;)">✏️ Tekenen</button>
+            <button class="htab" onclick="switchTab(&#39;ht1&#39;,&#39;naam&#39;)">⌨️ Naam typen</button>
+          </div>
+          <div class="htab-content active" id="ht1-teken-content">
+            <div class="tekenveld-wrap">
+              <canvas class="tekenveld" id="canvas-ht1" width="800" height="120" data-init="1"></canvas>
+              <button class="wis-btn" onclick="wisCanvas(&#39;canvas-ht1&#39;)">Wissen</button>
+            </div>
+          </div>
+          <div class="htab-content" id="ht1-naam-content">
+            <input type="text" id="ht1-naam-get" placeholder="Typ uw naam als handtekening" style="margin-top:8px; font-style:italic; font-size:16px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Handtekening 2: Aannemer -->
+      <div class="handtekening-blok">
+        <div class="handtekening-header">🔨 Werkverantwoordelijke / Voorman – Aannemer</div>
+        <div class="handtekening-body">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Naam</label><input type="text" id="ht2-naam" placeholder="Voornaam + Naam"></div>
+            <div class="form-group"><label class="form-label">Firma</label><input type="text" id="ht2-firma" placeholder="Naam firma"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Datum</label><input type="date" id="ht2-datum"></div>
+            <div class="form-group"><label class="form-label">Tijdstip</label><input type="time" id="ht2-tijd"></div>
+          </div>
+          <div class="handtekening-tabs">
+            <button class="htab active" onclick="switchTab(&#39;ht2&#39;,&#39;teken&#39;)">✏️ Tekenen</button>
+            <button class="htab" onclick="switchTab(&#39;ht2&#39;,&#39;naam&#39;)">⌨️ Naam typen</button>
+          </div>
+          <div class="htab-content active" id="ht2-teken-content">
+            <div class="tekenveld-wrap">
+              <canvas class="tekenveld" id="canvas-ht2" width="800" height="120" data-init="1"></canvas>
+              <button class="wis-btn" onclick="wisCanvas(&#39;canvas-ht2&#39;)">Wissen</button>
+            </div>
+          </div>
+          <div class="htab-content" id="ht2-naam-content">
+            <input type="text" id="ht2-naam-get" placeholder="Typ uw naam als handtekening" style="margin-top:8px; font-style:italic; font-size:16px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Vuurvergunning extra handtekening indien van toepassing -->
+      <div id="ht-vuur-blok" style="display:none;">
+        <div class="handtekening-blok">
+          <div class="handtekening-header">🔥 Vuurvergunning – Plaatselijke afdelingsleiding / Preventiedienst</div>
+          <div class="handtekening-body">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Naam afdelingsleiding</label><input type="text" id="ht3-naam" placeholder="Naam + datum"></div>
+              <div class="form-group"><label class="form-label">Datum</label><input type="date" id="ht3-datum"></div>
+            </div>
+            <div class="form-group"><label class="form-label">Naam preventiedienst (verplicht voor gezoneerde ruimtes)</label><input type="text" id="ht4-naam" placeholder="K. Dierick – Preventieadviseur Niveau II"></div>
+            <div class="alert alert-warning" style="margin-top:8px;">🔥 Na einde van de werken of einde van de dag: steeds minimum 1 uur na laatste slijp- of laswerken, zeer regelmatig controleren op smeulende resten. Noodnummer: <strong>0473/13 45 98</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="nav-knoppen">
+    <button class="btn btn-secondary" onclick="naarStap(5)">← Terug</button>
+    <button class="btn btn-primary" onclick="naarStap(7)">Volgende: Overzicht &amp; mail →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCHERM 7 – OVERZICHT & MAILEN
+═══════════════════════════════════════════════════ -->
+<div class="screen active" id="screen7">
+  <div class="card">
+    <div class="card-header">📄 Overzicht &amp; bevestiging</div>
+    <div class="card-body" id="overzicht-inhoud"><div class="print-doc"><div style="text-align:center;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #1F3864;"><div style="font-size:16px;font-weight:700;color:#1F3864;">BETAFENCE BELGIUM NV – WERKVERGUNNING &amp; TOOLBOXVERSLAG</div><div style="font-size:11px;color:#666;">Zwevegem | Datum afdruk: 4/6/2026</div></div><table class="print-tabel"><thead><tr><th colspan="4">1. ALGEMENE GEGEVENS</th></tr></thead><tbody><tr><td style="width:22%;color:#555;font-size:10px;">Project / opdracht</td><td colspan="3"><strong>—</strong></td></tr><tr><td style="color:#555;font-size:10px;">Afdeling</td><td>—</td><td style="color:#555;font-size:10px;">Werkzone</td><td>—</td></tr><tr><td style="color:#555;font-size:10px;">Aanvangsdatum</td><td>2026-06-04</td><td style="color:#555;font-size:10px;">Einddatum</td><td>—</td></tr><tr><td style="color:#555;font-size:10px;">Werfleider Betafence</td><td>—</td><td style="color:#555;font-size:10px;">Werkverantw. aannemer</td><td>—</td></tr><tr><td style="color:#555;font-size:10px;">Firma / aannemer</td><td>—</td><td style="color:#555;font-size:10px;">Voorman</td><td>—</td></tr></tbody></table><table class="print-tabel"><thead><tr><th>2. ACTIEVE WERKVERGUNNINGEN</th></tr></thead><tbody><tr><td style="padding:8px;"><span class="vergunning-chip">✓ Algemene werkvergunning (FM.100.353)</span></td></tr></tbody></table><table class="print-tabel"><thead><tr><th colspan="2">3. SPECIFIEKE RISICO'S (FM.100.320)</th></tr></thead><tbody></tbody></table><table class="print-tabel"><thead><tr><th style="width:70%">4. TOOLBOX CHECKLIST (FM.100.322)</th><th>Beoordeling</th></tr></thead><tbody><tr class="print-sectie-header"><td colspan="2" style="padding:4px 8px;">Verplichte documenten &amp; risicobeoordeling</td></tr><tr><td>RA (risicobeoordeling) gemaakt?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>DO 100325 getekend door aannemer?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Aannemer op hoogte van onze risico's?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>PBM's aannemer conform minimumvereisten?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr class="print-sectie-header"><td colspan="2" style="padding:4px 8px;">Ontvangst &amp; oriëntatie</td></tr><tr><td>Aanmeld-/afmeldprocedure toegelicht?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Locatie kleedzaal, sanitair, eetplaats meegedeeld?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Parkeerplaats aangeduid?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Noodnummer &amp; evacuatieplaats meegedeeld?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr class="print-sectie-header"><td colspan="2" style="padding:4px 8px;">Risico's besproken</td></tr><tr><td>Brand: vuurvergunning ok? Maatregelen ok?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Aanrijding: werkzone afgebakend?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Electrocutie: LOTO uitgevoerd?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Openingen in de vloer afgeschermd?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Maatregelen tegen vallen ok?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Chemische producten: SDS aanwezig?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Asbestplan geraadpleegd?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr class="print-sectie-header"><td colspan="2" style="padding:4px 8px;">Hulpgereedschap</td></tr><tr><td>Heftruck: keuring + opleiding ok?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Hoogtewerker: keuring + opleiding ok?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Verreiker: keuring + opleiding ok?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr class="print-sectie-header"><td colspan="2" style="padding:4px 8px;">Nutsvoorzieningen betrokken</td></tr><tr><td>Elektriciteit betrokken?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Gas betrokken?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Water / sprinkler betrokken?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr><tr><td>Perslucht / stoom betrokken?</td><td style="text-align:center;"><span style="color:#aaa">—</span></td></tr></tbody></table><table class="print-tabel"><thead><tr><th colspan="2">5. PBM'S &amp; EXTRA MAATREGELEN</th></tr></thead><tbody><tr><td style="width:35%;color:#555;font-size:10px;">Verplichte PBM's</td><td>—</td></tr><tr><td style="color:#555;font-size:10px;">Afbakening werkzone</td><td><span style="color:#aaa">—</span></td></tr><tr><td style="color:#555;font-size:10px;">Schriftelijke instructies</td><td><span style="color:#aaa">—</span></td></tr></tbody></table><table class="print-tabel" style="page-break-inside:avoid;"><thead><tr><th colspan="2">6. HANDTEKENINGEN – AKKOORDVERKLARING</th></tr></thead><tbody><tr><td style="width:50%;vertical-align:top;padding:10px 8px;"><div style="font-size:10px;color:#555;margin-bottom:4px;">Werfleider / Installatieverantwoordelijke – Betafence</div><div style="font-size:11px;font-weight:600;">—</div><div style="font-size:10px;color:#555;">Werfleider / Installatieverantwoordelijke</div><div style="font-size:10px;color:#555;">Datum: 2026-06-04 &nbsp; Tijdstip: 17:31</div><canvas id="print-canvas-ht1" style="width:100%;max-width:280px;height:60px;border:1px solid #ccc;display:block;margin-top:6px;" width="800" height="120"></canvas><div style="font-size:9px;color:#aaa;border-top:1px solid #eee;margin-top:4px;padding-top:2px;">Handtekening</div></td><td style="width:50%;vertical-align:top;padding:10px 8px;"><div style="font-size:10px;color:#555;margin-bottom:4px;">Werkverantwoordelijke / Voorman – Aannemer</div><div style="font-size:11px;font-weight:600;">—</div><div style="font-size:10px;color:#555;"></div><div style="font-size:10px;color:#555;">Datum: 2026-06-04 &nbsp; Tijdstip: 17:31</div><canvas id="print-canvas-ht2" style="width:100%;max-width:280px;height:60px;border:1px solid #ccc;display:block;margin-top:6px;" width="800" height="120"></canvas><div style="font-size:9px;color:#aaa;border-top:1px solid #eee;margin-top:4px;padding-top:2px;">Handtekening</div></td></tr></tbody></table><div style="font-size:9px;color:#aaa;text-align:center;margin-top:8px;border-top:1px solid #eee;padding-top:6px;">Betafence Belgium NV – Preventiedienst: K. Dierick, Preventieadviseur Niveau II – Dit document is niet verlengbaar.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">📧 Versturen naar betrokkenen</div>
+    <div class="card-body">
+      <div class="alert alert-info">💡 Klik op de knop om Outlook te openen met een vooraf ingevuld bericht. Voeg eventueel bijlagen toe (ingevuld formulier, situatieplan, …) vóór het verzenden.</div>
+      <div class="mailto-box">
+        <h3>📬 Ontvangers</h3>
+        <div class="form-group">
+          <label class="form-label">Aan (To)</label>
+          <div id="mail-to-preview" style="font-size:13px; color: var(--blauw-donker); padding: 4px 0;">—</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">CC</label>
+          <div id="mail-cc-preview" style="font-size:13px; color: var(--tekst-grijs); padding: 4px 0;">(geen)</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Extra CC toevoegen</label>
+          <input type="email" id="extra-cc" placeholder="extra@betafence.com">
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-success" onclick="openMailto()">📧 Openen in Outlook</button>
+        <button class="btn btn-secondary" onclick="window.print()">🖨️ Afdrukken / PDF opslaan</button>
+        <button class="btn btn-secondary" onclick="resetApp()">🔄 Nieuwe vergunning starten</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-knoppen">
+    <button class="btn btn-secondary" onclick="naarStap(6)">← Terug</button>
+    <div></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ── DATA STATE ──
+var gekozenVerg = [];
+var canvasStates = {};
+
+// ── NAVIGATIE ──
+function naarStap(nr) {
+  for (var i = 1; i <= 7; i++) {
+    document.getElementById('screen' + i).classList.remove('active');
+    var ind = document.getElementById('step' + i + '-ind');
+    ind.classList.remove('active', 'done');
+    if (i < nr) ind.classList.add('done');
+  }
+  document.getElementById('screen' + nr).classList.add('active');
+  document.getElementById('step' + nr + '-ind').classList.add('active');
+
+  if (nr === 7) bouwOverzicht();
+  if (nr === 6) {
+    checkVuurblok();
+
+    // Namen overnemen uit stap 1 (alleen als veld nog leeg is)
+    var ht1naam = document.getElementById('ht1-naam');
+    var ht1func = document.getElementById('ht1-functie');
+    var ht2naam = document.getElementById('ht2-naam');
+    var ht2firma = document.getElementById('ht2-firma');
+    if (!ht1naam.value) ht1naam.value = val('f-werfleider');
+    if (!ht1func.value) ht1func.value = 'Werfleider / Installatieverantwoordelijke';
+    if (!ht2naam.value) ht2naam.value = val('f-werkverantwoordelijke');
+    if (!ht2firma.value) ht2firma.value = val('f-firma');
+
+    setTimeout(function() {
+      ['canvas-ht1', 'canvas-ht2'].forEach(function(id) {
+        var c = document.getElementById(id);
+        if (c) { delete c.dataset.init; }
+        initCanvas(id);
+      });
+    }, 100);
+  }
+  window.scrollTo(0, 0);
+}
+
+// ── VERGUNNING TOGGLE ──
+function toggleVerg(code, el) {
+  var idx = gekozenVerg.indexOf(code);
+  if (idx === -1) {
+    gekozenVerg.push(code);
+    el.classList.add('selected');
+  } else {
+    gekozenVerg.splice(idx, 1);
+    el.classList.remove('selected');
+  }
+  updateVergWaarschuwingen();
+}
+
+function updateVergWaarschuwingen() {
+  var w = document.getElementById('verg-waarschuwingen');
+  var msgs = [];
+  if (gekozenVerg.includes('350')) msgs.push('⚠️ Asbestvergunning: Melding FOD WASO minimum 15 dagen voor aanvang vereist!');
+  if (gekozenVerg.includes('356')) msgs.push('⚡ Gezoneerde ruimte: Vuurvergunning vereist preventiedienst-handtekening.');
+  if (gekozenVerg.includes('354')) msgs.push('🕳️ Besloten ruimte: Gasmetingen vóór én tijdens betreden verplicht.');
+  if (gekozenVerg.includes('355')) msgs.push('⚡ Elektrische installaties: AREI art. 266 van toepassing. Enkel BA4/BA5 mogen werken onder spanning.');
+  if (gekozenVerg.includes('359')) msgs.push('🔧 Nutsvoorzieningen: KLIP-planaanvraag verplicht bij grond-/graafwerken (Vlaamse overheid).');
+  w.innerHTML = msgs.map(function(m) { return '<div class="alert alert-warning">' + m + '</div>'; }).join('');
+}
+
+// ── VUURVERGUNNING BLOK ──
+function checkVuurblok() {
+  var blok = document.getElementById('ht-vuur-blok');
+  blok.style.display = (gekozenVerg.includes('321') || gekozenVerg.includes('356')) ? 'block' : 'none';
+}
+
+// ── HANDTEKENING TABS ──
+function switchTab(prefix, type) {
+  ['teken', 'naam'].forEach(function(t) {
+    var btn = document.querySelector('[onclick="switchTab(\'' + prefix + '\',\'' + t + '\')"]');
+    var content = document.getElementById(prefix + '-' + t + '-content');
+    if (t === type) {
+      if (btn) btn.classList.add('active');
+      if (content) content.classList.add('active');
+    } else {
+      if (btn) btn.classList.remove('active');
+      if (content) content.classList.remove('active');
+    }
+  });
+}
+
+// TEKEN CANVAS
+function initCanvas(id) {
+  var canvas = document.getElementById(id);
+  if (!canvas) return;
+  if (canvas.dataset.init === '1') return;
+  canvas.dataset.init = '1';
+
+  var ctx = canvas.getContext('2d');
+  var lastX = 0, lastY = 0;
+
+  function pos(e) {
+    var r = canvas.getBoundingClientRect();
+    var sx = canvas.width  / r.width;
+    var sy = canvas.height / r.height;
+    return { x: (e.clientX - r.left) * sx, y: (e.clientY - r.top) * sy };
+  }
+
+  canvas.addEventListener('pointerdown', function(e) {
+    e.preventDefault();
+    canvas.setPointerCapture(e.pointerId);
+    var p = pos(e);
+    lastX = p.x; lastY = p.y;
+    ctx.fillStyle = '#1F3864';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  canvas.addEventListener('pointermove', function(e) {
+    if (e.buttons === 0) return;
+    e.preventDefault();
+    var p = pos(e);
+    ctx.beginPath();
+    ctx.strokeStyle = '#1F3864';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    lastX = p.x; lastY = p.y;
+  });
+}
+
+function wisCanvas(id) {
+  var canvas = document.getElementById(id);
+  if (!canvas) return;
+  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// ── PBM CHECKBOXES ──
+document.querySelectorAll('.pbm-item input[type="checkbox"]').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    var lbl = this.closest('.pbm-item');
+    lbl.classList.toggle('checked', this.checked);
+  });
+});
+
+// ── OVERZICHT BOUWEN ──
+function getRadioVal(name) {
+  var el = document.querySelector('input[name="' + name + '"]:checked');
+  return el ? el.value.toUpperCase() : '—';
+}
+
+function getCheckboxVals(container) {
+  var vals = [];
+  document.querySelectorAll('#' + container + ' input[type="checkbox"]:checked').forEach(function(cb) { vals.push(cb.value); });
+  return vals.length ? vals.join(', ') : '—';
+}
+
+function radioLabel(name) {
+  var el = document.querySelector('input[name="' + name + '"]:checked');
+  if (!el) return '<span style="color:#aaa">—</span>';
+  var v = el.value.toUpperCase();
+  var kleur = v === 'JA' ? '#1e7e34' : v === 'NEEN' ? '#c0392b' : '#888';
+  return '<strong style="color:' + kleur + '">' + v + '</strong>';
+}
+
+function bouwOverzicht() {
+  var vergNamen = {
+    '353': 'Algemene werkvergunning (FM.100.353)',
+    '321': 'Vuurvergunning (FM.100.321)',
+    '350': 'Asbest (FM.100.350)',
+    '351': 'Dakwerken (FM.100.351)',
+    '352': 'Werken op hoogte (FM.100.352)',
+    '354': 'Besloten ruimte (FM.100.354)',
+    '355': 'Elektrische installaties (FM.100.355)',
+    '356': 'Gezoneerde ruimte (FM.100.356)',
+    '357': 'Graafwerken (FM.100.357)',
+    '358': 'Overige risicovolle taken (FM.100.358)',
+    '359': 'Nutsvoorzieningen (FM.100.359)'
+  };
+
+  var alleVerg = ['353'].concat(gekozenVerg);
+  var chips = alleVerg.map(function(v) { return '<span class="vergunning-chip">\u2713 ' + (vergNamen[v] || v) + '</span>'; }).join('');
+
+  var pbmChecked = [];
+  document.querySelectorAll('#pbm-grid input[type="checkbox"]:checked').forEach(function(cb) { pbmChecked.push(cb.value); });
+
+  var html = '<div class="print-doc">';
+
+  // DOCUMENT HEADER
+  html += '<div style="text-align:center;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #1F3864;">';
+  html += '<div style="font-size:16px;font-weight:700;color:#1F3864;">BETAFENCE BELGIUM NV \u2013 WERKVERGUNNING &amp; TOOLBOXVERSLAG</div>';
+  html += '<div style="font-size:11px;color:#666;">Zwevegem | Datum afdruk: ' + new Date().toLocaleDateString('nl-BE') + '</div>';
+  html += '</div>';
+
+  // SECTIE 1: ALGEMENE INFO
+  html += '<table class="print-tabel"><thead><tr><th colspan="4">1. ALGEMENE GEGEVENS</th></tr></thead><tbody>';
+  html += '<tr><td style="width:22%;color:#555;font-size:10px;">Project / opdracht</td><td colspan="3"><strong>' + (val('f-opdracht') || '\u2014') + '</strong></td></tr>';
+  html += '<tr><td style="color:#555;font-size:10px;">Afdeling</td><td>' + (val('f-afdeling') || '\u2014') + '</td><td style="color:#555;font-size:10px;">Werkzone</td><td>' + (val('f-werkzone') || '\u2014') + '</td></tr>';
+  html += '<tr><td style="color:#555;font-size:10px;">Aanvangsdatum</td><td>' + (val('f-datum-start') || '\u2014') + '</td><td style="color:#555;font-size:10px;">Einddatum</td><td>' + (val('f-datum-einde') || '\u2014') + '</td></tr>';
+  html += '<tr><td style="color:#555;font-size:10px;">Werfleider Betafence</td><td>' + (val('f-werfleider') || '\u2014') + '</td><td style="color:#555;font-size:10px;">Werkverantw. aannemer</td><td>' + (val('f-werkverantwoordelijke') || '\u2014') + '</td></tr>';
+  html += '<tr><td style="color:#555;font-size:10px;">Firma / aannemer</td><td>' + (val('f-firma') || '\u2014') + '</td><td style="color:#555;font-size:10px;">Voorman</td><td>' + (val('f-voorman') || '\u2014') + '</td></tr>';
+  html += '</tbody></table>';
+
+  // SECTIE 2: ACTIEVE VERGUNNINGEN
+  html += '<table class="print-tabel"><thead><tr><th>2. ACTIEVE WERKVERGUNNINGEN</th></tr></thead>';
+  html += '<tbody><tr><td style="padding:8px;">' + chips + '</td></tr></tbody></table>';
+
+  // SECTIE 3: SPECIFIEKE RISICO'S
+  var risicosData = [
+    ['Brand / open vlam','r-brand'],['Besloten ruimte','r-besloten'],['Werken op hoogte','r-hoogte'],
+    ['Dakwerken','r-dak'],['Asbest','r-asbest'],['Schadelijke stoffen','r-stoffen'],
+    ['ATEX / gezoneerde ruimte','r-atex'],['Elektrische installaties','r-elek'],
+    ['Lawaai / stof / geur','r-lawaai'],['Kanalen / putten','r-kanalen'],['Co-activiteit','r-mede']
+  ];
+  html += '<table class="print-tabel"><thead><tr><th colspan="2">3. SPECIFIEKE RISICO\'S (FM.100.320)</th></tr></thead><tbody>';
+  var specProject = val('f-spec-project');
+  if (specProject) html += '<tr><td style="color:#555;font-size:10px;width:35%;">Projectomschrijving</td><td>' + specProject + '</td></tr>';
+  risicosData.forEach(function(r) {
+    var v = val(r[1]);
+    if (v && v.toLowerCase() !== 'nvt' && v !== '') {
+      html += '<tr><td style="width:35%;color:#555;font-size:10px;">' + r[0] + '</td><td>' + v + '</td></tr>';
+    }
+  });
+  var aannemerRisicos = val('r-aannemer-risicos');
+  if (aannemerRisicos) html += '<tr><td style="color:#555;font-size:10px;">Risico\'s aannemer</td><td>' + aannemerRisicos + '</td></tr>';
+  html += '</tbody></table>';
+
+  // SECTIE 4: TOOLBOX CHECKLIST
+  html += '<table class="print-tabel"><thead><tr><th style="width:70%">4. TOOLBOX CHECKLIST (FM.100.322)</th><th>Beoordeling</th></tr></thead><tbody>';
+  var checks = [
+    ['h','Verplichte documenten & risicobeoordeling',''],
+    ['','RA (risicobeoordeling) gemaakt?','c-ra'],
+    ['','DO 100325 getekend door aannemer?','c-do'],
+    ['','Aannemer op hoogte van onze risico\'s?','c-risicos'],
+    ['','PBM\'s aannemer conform minimumvereisten?','c-pbm'],
+    ['h','Ontvangst & ori\u00ebntatie',''],
+    ['','Aanmeld-/afmeldprocedure toegelicht?','c-aanmeld'],
+    ['','Locatie kleedzaal, sanitair, eetplaats meegedeeld?','c-kleed'],
+    ['','Parkeerplaats aangeduid?','c-park'],
+    ['','Noodnummer & evacuatieplaats meegedeeld?','c-nood'],
+    ['h','Risico\'s besproken',''],
+    ['','Brand: vuurvergunning ok? Maatregelen ok?','c-tbrand'],
+    ['','Aanrijding: werkzone afgebakend?','c-aanrij'],
+    ['','Electrocutie: LOTO uitgevoerd?','c-loto'],
+    ['','Openingen in de vloer afgeschermd?','c-open'],
+    ['','Maatregelen tegen vallen ok?','c-val'],
+    ['','Chemische producten: SDS aanwezig?','c-sds'],
+    ['','Asbestplan geraadpleegd?','c-asb'],
+    ['h','Hulpgereedschap',''],
+    ['','Heftruck: keuring + opleiding ok?','c-heft'],
+    ['','Hoogtewerker: keuring + opleiding ok?','c-hwer'],
+    ['','Verreiker: keuring + opleiding ok?','c-verr'],
+    ['h','Nutsvoorzieningen betrokken',''],
+    ['','Elektriciteit betrokken?','c-nuts-elek'],
+    ['','Gas betrokken?','c-nuts-gas'],
+    ['','Water / sprinkler betrokken?','c-nuts-water'],
+    ['','Perslucht / stoom betrokken?','c-nuts-lucht']
+  ];
+  checks.forEach(function(c) {
+    if (c[0] === 'h') {
+      html += '<tr class="print-sectie-header"><td colspan="2" style="padding:4px 8px;">' + c[1] + '</td></tr>';
+    } else {
+      html += '<tr><td>' + c[1] + '</td><td style="text-align:center;">' + radioLabel(c[2]) + '</td></tr>';
+    }
+  });
+  var toolboxOpmerking = val('f-toolbox-opmerking');
+  if (toolboxOpmerking) html += '<tr><td style="color:#555;font-size:10px;">Opmerkingen toolbox</td><td>' + toolboxOpmerking + '</td></tr>';
+  html += '</tbody></table>';
+
+  // SECTIE 5: PBM's & MAATREGELEN
+  html += '<table class="print-tabel"><thead><tr><th colspan="2">5. PBM\'S &amp; EXTRA MAATREGELEN</th></tr></thead><tbody>';
+  html += '<tr><td style="width:35%;color:#555;font-size:10px;">Verplichte PBM\'s</td><td>' + (pbmChecked.length ? pbmChecked.join(', ') : '\u2014') + '</td></tr>';
+  var htType = val('f-handschoenen-type');
+  if (htType) html += '<tr><td style="color:#555;font-size:10px;">Type handschoenen</td><td>' + htType + '</td></tr>';
+  html += '<tr><td style="color:#555;font-size:10px;">Afbakening werkzone</td><td>' + radioLabel('afbakening') + '</td></tr>';
+  html += '<tr><td style="color:#555;font-size:10px;">Schriftelijke instructies</td><td>' + radioLabel('instructies') + '</td></tr>';
+  var maatregelen = val('f-maatregelen');
+  if (maatregelen) html += '<tr><td style="color:#555;font-size:10px;">Preventiemaatregelen</td><td>' + maatregelen + '</td></tr>';
+  var chemisch = val('f-chemisch');
+  if (chemisch) html += '<tr><td style="color:#555;font-size:10px;">Chemische producten</td><td>' + chemisch + '</td></tr>';
+  html += '</tbody></table>';
+
+  // SECTIE 6: HANDTEKENINGEN
+  html += '<table class="print-tabel" style="page-break-inside:avoid;"><thead><tr><th colspan="2">6. HANDTEKENINGEN \u2013 AKKOORDVERKLARING</th></tr></thead><tbody><tr>';
+  html += '<td style="width:50%;vertical-align:top;padding:10px 8px;">';
+  html += '<div style="font-size:10px;color:#555;margin-bottom:4px;">Werfleider / Installatieverantwoordelijke \u2013 Betafence</div>';
+  html += '<div style="font-size:11px;font-weight:600;">' + (val('ht1-naam') || '\u2014') + '</div>';
+  html += '<div style="font-size:10px;color:#555;">' + (val('ht1-functie') || '') + '</div>';
+  html += '<div style="font-size:10px;color:#555;">Datum: ' + (val('ht1-datum') || '\u2014') + ' &nbsp; Tijdstip: ' + (val('ht1-tijd') || '\u2014') + '</div>';
+  html += '<canvas id="print-canvas-ht1" style="width:100%;max-width:280px;height:60px;border:1px solid #ccc;display:block;margin-top:6px;"></canvas>';
+  html += '<div style="font-size:9px;color:#aaa;border-top:1px solid #eee;margin-top:4px;padding-top:2px;">Handtekening</div></td>';
+  html += '<td style="width:50%;vertical-align:top;padding:10px 8px;">';
+  html += '<div style="font-size:10px;color:#555;margin-bottom:4px;">Werkverantwoordelijke / Voorman \u2013 Aannemer</div>';
+  html += '<div style="font-size:11px;font-weight:600;">' + (val('ht2-naam') || '\u2014') + '</div>';
+  html += '<div style="font-size:10px;color:#555;">' + (val('ht2-firma') || '') + '</div>';
+  html += '<div style="font-size:10px;color:#555;">Datum: ' + (val('ht2-datum') || '\u2014') + ' &nbsp; Tijdstip: ' + (val('ht2-tijd') || '\u2014') + '</div>';
+  html += '<canvas id="print-canvas-ht2" style="width:100%;max-width:280px;height:60px;border:1px solid #ccc;display:block;margin-top:6px;"></canvas>';
+  html += '<div style="font-size:9px;color:#aaa;border-top:1px solid #eee;margin-top:4px;padding-top:2px;">Handtekening</div></td>';
+  html += '</tr></tbody></table>';
+
+  html += '<div style="font-size:9px;color:#aaa;text-align:center;margin-top:8px;border-top:1px solid #eee;padding-top:6px;">';
+  html += 'Betafence Belgium NV \u2013 Preventiedienst: K. Dierick, Preventieadviseur Niveau II \u2013 Dit document is niet verlengbaar.';
+  html += '</div></div>';
+
+  document.getElementById('overzicht-inhoud').innerHTML = html;
+
+  // Handtekeningen kopiëren naar printcanvas
+  setTimeout(function() {
+    ['ht1','ht2'].forEach(function(id) {
+      var src = document.getElementById('canvas-' + id);
+      var dst = document.getElementById('print-canvas-' + id);
+      if (src && dst) {
+        dst.width = src.width;
+        dst.height = src.height;
+        dst.getContext('2d').drawImage(src, 0, 0);
+      }
+    });
+  }, 150);
+
+  // Mail preview
+  var to = [val('f-mail-betafence'), val('f-mail-aannemer')].filter(Boolean).join('; ');
+  document.getElementById('mail-to-preview').textContent = to || '\u2014';
+  var ccRaw = val('f-mail-cc').split(/[,;\s]+/).map(function(s){return s.trim();}).filter(Boolean).join('; ');
+  document.getElementById('mail-cc-preview').textContent = ccRaw || '(geen)';
+}
+function val(id) {
+  var el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+// ── MAILTO ──
+function normaliseerMails(str) {
+  return str.split(/[,;\s]+/).map(function(s){ return s.trim(); }).filter(Boolean).join(';');
+}
+
+function openMailto() {
+  var to = normaliseerMails([val('f-mail-betafence'), val('f-mail-aannemer')].filter(Boolean).join(';'));
+  var extraCC = val('extra-cc');
+  var ccBase = val('f-mail-cc');
+  var cc = normaliseerMails([ccBase, extraCC].filter(Boolean).join(';'));
+
+  var datum = val('f-datum-start') || new Date().toLocaleDateString('nl-BE');
+  var project = val('f-opdracht') || '(zie bijlage)';
+  var firma = val('f-firma') || '—';
+  var werfleider = val('f-werfleider') || '—';
+  var werkverantwoordelijke = val('f-werkverantwoordelijke') || '—';
+
+  var vergNamen = {'321':'Vuurvergunning','350':'Asbest','351':'Dakwerken','352':'Werken op hoogte','354':'Besloten ruimte','355':'Elektrische installaties','356':'ATEX-zone','357':'Graafwerken','358':'Overige risicovolle taken','359':'Nutsvoorzieningen'};
+  var vergLijst = 'Algemene werkvergunning' + (gekozenVerg.length ? ', ' + gekozenVerg.map(function(v){ return vergNamen[v]||v; }).join(', ') : '');
+
+  var subject = encodeURIComponent('Betafence Werkvergunning + Toolbox – ' + project + ' – ' + datum);
+  var body = encodeURIComponent(
+    'Geachte,\r\n\r\n' +
+    'Hierbij de bevestiging van de toolboxmeeting gehouden op ' + datum + ' voor de onderstaande werkzaamheden op de site van Betafence Belgium NV, Zwevegem.\r\n\r\n' +
+    'PROJECT: ' + project + '\r\n' +
+    'AFDELING / ZONE: ' + (val('f-afdeling') || '—') + ' – ' + (val('f-werkzone') || '—') + '\r\n' +
+    'AANVANG: ' + (val('f-datum-start') || '—') + '\r\n' +
+    'VOORZIENE EINDDATUM: ' + (val('f-datum-einde') || '—') + '\r\n' +
+    'AANNEMER: ' + firma + '\r\n' +
+    'WERFLEIDER BETAFENCE: ' + werfleider + '\r\n\r\n' +
+    'ACTIEVE WERKVERGUNNINGEN:\r\n' + vergLijst + '\r\n\r\n' +
+    'Alle betrokken partijen hebben de toolbox bijgewoond en akkoord getekend.\r\n' +
+    'De werkvergunning is niet verlengbaar. Bij wijziging van de werksituatie dient een nieuwe vergunning aangevraagd te worden.\r\n\r\n' +
+    'Opgelet: het definitieve einde van de werken dient door de werkverantwoordelijke aan de installatie- of machineverantwoordelijke meegedeeld te worden.\r\n\r\n' +
+    '⚠️ OPGELET: Voeg de ingevulde en ondertekende werkvergunning toe als bijlage vóór het verzenden.\r\n\r\n' +
+    'Met vriendelijke groet,\r\n' +
+    werkverantwoordelijke + '\r\n' +
+    firma + '\r\n\r\n' +
+    'In opdracht van / Namens:\r\n' +
+    werfleider + '\r\n' +
+    'Betafence Belgium NV – Zwevegem'
+  );
+
+  var mailto = 'mailto:' + to + '?cc=' + cc + '&subject=' + subject + '&body=' + body;
+  window.location.href = mailto;
+}
+
+// ── RESET ──
+function resetApp() {
+  if (confirm('Nieuwe werkvergunning starten? Alle ingevoerde gegevens worden gewist.')) {
+    location.reload();
+  }
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', function() {
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('f-datum-start').value = today;
+  document.getElementById('ht1-datum').value = today;
+  document.getElementById('ht2-datum').value = today;
+  var now = new Date().toTimeString().slice(0,5);
+  document.getElementById('ht1-tijd').value = now;
+  document.getElementById('ht2-tijd').value = now;
+});
+
+
+</script>
+
+
+</body></html>

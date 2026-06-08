@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)file:///C:/Users/kurt.dierick/Downloads/FM100313_Aangifte_Incidenten_Ongevallen%20(6).html -->
+<html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>FM 100313 – Melding Incidenten &amp; Ongevallen</title>
+<style>
+:root {
+  --blauw: #1F3864;
+  --blauw2: #2E5FA3;
+  --blauw3: #DCE9F5;
+  --grijs: #D9D9D9;
+  --wit: #ffffff;
+  --tekst: #1a1a1a;
+  --rood: #CC0000;
+  --tap: 52px; /* minimum tik-hoogte */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: rgba(31,56,100,0.15); }
+
+html { font-size: 16px; }
+
+body {
+  font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: #edf2f9;
+  color: var(--tekst);
+  padding-bottom: 40px;
+}
+
+/* ─── HEADER ─── */
+.header {
+  background: var(--blauw);
+  color: #fff;
+  padding: 14px 16px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.header-top { display: flex; justify-content: space-between; align-items: center; }
+.header h1 { font-size: 14px; font-weight: 700; letter-spacing: 0.3px; line-height: 1.3; }
+.header .fm-nr { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+.logo-txt { font-size: 16px; font-weight: 900; letter-spacing: 2px; color: #fff; white-space: nowrap; }
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  margin-top: 10px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: #7EC8F0;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* ─── SECTION CARDS ─── */
+.card {
+  background: #fff;
+  margin: 12px 12px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(31,56,100,0.10);
+}
+.card-header {
+  background: var(--blauw);
+  color: #fff;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-header.accent { background: var(--blauw2); }
+.card-body { padding: 16px; }
+
+/* ─── VELDEN ─── */
+.field { margin-bottom: 16px; }
+.field:last-child { margin-bottom: 0; }
+
+label.lbl {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blauw);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 6px;
+}
+.req { color: var(--rood); }
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+select,
+textarea {
+  width: 100%;
+  min-height: var(--tap);
+  border: 2px solid #dde4f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 16px; /* prevent zoom on iOS */
+  font-family: inherit;
+  background: #fafcff;
+  color: var(--tekst);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--blauw2);
+  box-shadow: 0 0 0 3px rgba(46,95,163,0.15);
+}
+textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
+select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231F3864' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
+
+.hint { font-size: 11px; color: #888; margin-top: 5px; font-style: italic; }
+
+/* ─── ROW 2-kolommen ─── */
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ─── RADIO BUTTONS ─── */
+.radio-group { display: flex; flex-direction: column; gap: 0; border: 2px solid #dde4f0; border-radius: 10px; overflow: hidden; }
+.radio-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #eef0f5;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.radio-opt:last-child { border-bottom: none; }
+.radio-opt:active { background: var(--blauw3); }
+.radio-opt input[type="radio"] { width: 22px; height: 22px; accent-color: var(--blauw2); flex-shrink: 0; }
+.radio-opt span { font-size: 15px; }
+
+/* ─── CHECKBOXES ─── */
+.check-list { display: flex; flex-direction: column; gap: 0; border: 2px solid #dde4f0; border-radius: 10px; overflow: hidden; }
+.check-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #eef0f5;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.check-opt:last-child { border-bottom: none; }
+.check-opt input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--blauw2); flex-shrink: 0; border-radius: 4px; }
+.check-opt span { font-size: 15px; line-height: 1.3; }
+.check-opt.checked { background: var(--blauw3); }
+
+.check-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 2px solid #dde4f0; border-radius: 10px; overflow: hidden; }
+.check-grid-2 .check-opt { border-right: 1px solid #eef0f5; border-bottom: 1px solid #eef0f5; }
+.check-grid-2 .check-opt:nth-child(2n) { border-right: none; }
+
+/* ─── FOTO UPLOAD ─── */
+.foto-zone {
+  border: 2.5px dashed var(--blauw2);
+  border-radius: 12px;
+  background: var(--blauw3);
+  overflow: hidden;
+}
+/* De klikbare uploadknop bovenin de zone */
+.foto-upload-btn {
+  position: relative;
+  text-align: center;
+  padding: 24px 16px;
+  cursor: pointer;
+}
+.foto-upload-btn input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  min-height: unset;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 0;
+}
+.foto-upload-btn .foto-zone-inner { pointer-events: none; }
+.foto-icon { font-size: 40px; margin-bottom: 8px; }
+.foto-zone p { font-size: 14px; font-weight: 700; color: var(--blauw); }
+.foto-zone small { font-size: 12px; color: #666; }
+
+/* Preview-gebied binnenin de zone, onder de knop */
+.foto-preview {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 0 4px 4px;
+}
+.foto-preview:empty { padding: 0; display: none; }
+.foto-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.foto-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+.foto-item .rm-foto {
+  position: absolute; top: 6px; right: 6px;
+  background: rgba(180,0,0,0.85); color: #fff; border: none; border-radius: 50%;
+  width: 28px; height: 28px; font-size: 17px; line-height: 28px;
+  text-align: center; cursor: pointer; box-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  z-index: 2;
+}
+
+/* ─── RISICO BADGE ─── */
+.risico-result {
+  margin-top: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #dde4f0;
+}
+.risico-result-header {
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-align: center;
+  background: #999;
+  transition: background 0.3s;
+}
+.risico-result-body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #f8f9ff;
+}
+.risico-nr {
+  font-size: 36px;
+  font-weight: 900;
+  color: #999;
+  min-width: 70px;
+  text-align: center;
+  line-height: 1;
+  transition: color 0.3s;
+}
+.risico-omschrijving { font-size: 13px; color: var(--tekst); line-height: 1.4; }
+
+.legenda-strip { display: flex; gap: 0; margin-top: 12px; border-radius: 8px; overflow: hidden; }
+.leg { flex: 1; padding: 6px 4px; text-align: center; font-size: 9px; font-weight: 700; color: #fff; line-height: 1.3; }
+
+/* ─── EMAIL SECTIE ─── */
+.email-card { background: #f0f5ff; margin: 12px; border-radius: 12px; border: 2px solid var(--blauw2); overflow: hidden; }
+.email-card .card-header { background: var(--blauw2); }
+.email-card .card-body { padding: 16px; }
+
+.to-tags { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
+.to-tag {
+  background: var(--blauw);
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cc-tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 10px; }
+.cc-tag {
+  background: var(--blauw2);
+  color: #fff;
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cc-tag button { background: none; border: none; color: rgba(255,255,255,0.8); font-size: 16px; cursor: pointer; line-height: 1; padding: 0 2px; }
+
+.add-cc-row { display: flex; gap: 8px; }
+.add-cc-row input { flex: 1; }
+.btn-sm {
+  min-height: var(--tap);
+  padding: 0 18px;
+  background: var(--blauw2);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── GROTE KNOPPEN ─── */
+.btn-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-main:active { opacity: 0.85; transform: scale(0.98); }
+.btn-email { background: var(--blauw); color: #fff; }
+.btn-print { background: var(--blauw2); color: #fff; }
+.btn-reset { background: #666; color: #fff; }
+
+/* ─── INFO BOX ─── */
+.info-box {
+  background: #e8f4fd;
+  border-left: 4px solid var(--blauw2);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 12px;
+  font-size: 13px;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+/* ─── SECTION DIVIDER ─── */
+.sectie-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blauw2);
+  letter-spacing: 1px;
+  padding: 14px 0 2px;
+  text-transform: uppercase;
+}
+
+/* ─── TOAST ─── */
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  z-index: 9999;
+  display: none;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  line-height: 1.4;
+}
+
+@media (min-width: 600px) {
+  body { max-width: 640px; margin: 0 auto; }
+  .row2 { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { background: #fff; }
+  .email-card, .btn-main, #toast, .progress-bar { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #ccc; margin: 8px 0; }
+  .foto-upload-btn { display: none !important; }
+  .foto-zone { border: 1px solid #ccc; background: #fff; }
+  .foto-preview:empty { display: none !important; }
+  .foto-zone:has(.foto-preview:empty) { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <span class="logo-txt">BETAFENCE</span>
+    <div style="text-align:right">
+      <div class="fm-nr">FM 100313</div>
+      <div class="fm-nr" id="vandaag-header">8/6/2026</div>
+    </div>
+  </div>
+  <h1>Melding &amp; Onderzoek van Incidenten en Ongevallen</h1>
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: INVULLER -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header accent">📧 Uw gegevens (invuller)</div>
+  <div class="card-body">
+    <div class="field">
+      <label class="lbl">Uw naam <span class="req">*</span></label>
+      <input type="text" id="invuller_naam" placeholder="Voornaam Achternaam" autocomplete="name">
+    </div>
+    <div class="field">
+      <label class="lbl">Uw e-mailadres <span class="req">*</span></label>
+      <input type="email" id="invuller_email" placeholder="voornaam.achternaam@praesidiad.com" autocomplete="email" inputmode="email">
+    </div>
+    <div class="field">
+      <label class="lbl">Datum invullen</label>
+      <input type="date" id="invuldatum">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: BASISGEGEVENS -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">1 · Basisgegevens incident</div>
+  <div class="card-body">
+    <div class="row2">
+      <div class="field">
+        <label class="lbl">Datum incident <span class="req">*</span></label>
+        <input type="date" id="datum_ongeval">
+      </div>
+      <div class="field">
+        <label class="lbl">Uur incident <span class="req">*</span></label>
+        <input type="time" id="uur_ongeval">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label class="lbl">Uur melding</label>
+        <input type="time" id="uur_melding">
+      </div>
+      <div class="field" style="display:flex;flex-direction:column;justify-content:flex-end">
+        <label class="lbl">Datum + uur verslag</label>
+        <input type="datetime-local" id="datum_verslag">
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Naam SO (Slachtoffer / Betrokkene)</label>
+      <input type="text" id="naam_so" placeholder="Voornaam Achternaam" autocomplete="off">
+    </div>
+    <div class="field">
+      <label class="lbl">Naam TL (Teamleider / Leidinggevende)</label>
+      <input type="text" id="naam_tl" placeholder="Voornaam Achternaam" autocomplete="off">
+    </div>
+    <div class="field">
+      <label class="lbl">Statuut werknemer</label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="statuut" value="Interim"><span>Interim</span></label>
+        <label class="radio-opt"><input type="radio" name="statuut" value="Vast"><span>Vast</span></label>
+        <label class="radio-opt"><input type="radio" name="statuut" value="Tijdelijk"><span>Tijdelijk</span></label>
+        <label class="radio-opt"><input type="radio" name="statuut" value="Aannemer / Derde"><span>Aannemer / Derde</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Afdeling</label>
+      <input type="text" id="afdeling" placeholder="bv. Sliding Gates, Poederlak, Logistiek…">
+    </div>
+    <div class="field">
+      <label class="lbl">Plaats van het incident</label>
+      <input type="text" id="plaats_incident" placeholder="bv. Hal 3 – Lasersnijder / Laadkaai 2">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: OMSCHRIJVING -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">2 · Korte omschrijving</div>
+  <div class="card-body">
+    <div class="field">
+      <label class="lbl">1 – Situatie vóór het incident</label>
+      <p class="hint" style="margin-bottom:6px">Beschrijf de omstandigheden vóór het incident of ongeval</p>
+      <textarea id="situatie_voor" placeholder="Omstandigheden voor het incident…" rows="4"></textarea>
+    </div>
+    <div class="field">
+      <label class="lbl">2 – Wat ging er mis?</label>
+      <textarea id="wat_misging" placeholder="Beschrijf wat er fout liep…" rows="4"></textarea>
+    </div>
+    <div class="field">
+      <label class="lbl">3 – Gevolg</label>
+      <p class="hint" style="margin-bottom:6px">Beschrijving van het incident + evt. lichamelijke en/of materiële schade</p>
+      <textarea id="gevolg_beschrijving" placeholder="Gevolgen, letsels, schade…" rows="4"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: FOTO/SCHETS -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">3 · Foto / Schets van de situatie</div>
+  <div class="card-body">
+    <div class="foto-zone">
+      <div class="foto-upload-btn">
+        <input type="file" id="foto_situatie" accept="image/*" multiple="" capture="environment" onchange="handleFoto(this,&#39;prev_situatie&#39;)">
+        <div class="foto-zone-inner">
+          <div class="foto-icon">📷</div>
+          <p>Tik hier om foto te nemen<br>of uit galerij te kiezen</p>
+          <small>Meerdere foto's zijn mogelijk</small>
+        </div>
+      </div>
+      <div class="foto-preview" id="prev_situatie"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: OORZAKEN -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">4 · Oorzaken</div>
+  <div class="card-body">
+    <div class="field">
+      <label class="lbl">👤 Mens</label>
+      <p class="hint" style="margin-bottom:6px">bv. gevaarlijke handeling, vermoeidheid, aandachtsverlies…</p>
+      <textarea id="oorzaak_mens" placeholder="Menselijke oorzaken…" rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="lbl">🔧 Uitrusting</label>
+      <p class="hint" style="margin-bottom:6px">bv. defecte uitrusting, geen beveiliging, constructiefout…</p>
+      <textarea id="oorzaak_uitrusting" placeholder="Oorzaken uitrusting…" rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="lbl">🏭 Omgeving</label>
+      <p class="hint" style="margin-bottom:6px">bv. slechte verlichting, te smal pad, weersomstandigheden…</p>
+      <textarea id="oorzaak_omgeving" placeholder="Omgevingsoorzaken…" rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="lbl">📦 Produkt</label>
+      <p class="hint" style="margin-bottom:6px">bv. zware last, chemisch product, scherpe randen…</p>
+      <textarea id="oorzaak_produkt" placeholder="Productoorzaken…" rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="lbl">📋 Organisatie</label>
+      <p class="hint" style="margin-bottom:6px">bv. geen instructie, onvoldoende opleiding, foutieve procedure…</p>
+      <textarea id="oorzaak_organisatie" placeholder="Organisatorische oorzaken…" rows="3"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: RISICOBEOORDELING -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">5 · Risicobeoordeling – Kinney (W × B × E = R)</div>
+  <div class="card-body">
+
+    <div class="field">
+      <label class="lbl">W – Waarschijnlijkheid</label>
+      <p class="hint" style="margin-bottom:6px">Kans dat dit incident opnieuw optreedt</p>
+      <select id="w_waarde" onchange="berekenRisico()">
+        <option value="">— Selecteer —</option>
+        <option value="10">10 – Zeer waarschijnlijk (verwacht)</option>
+        <option value="6">6 – Vrij waarschijnlijk</option>
+        <option value="3">3 – Ongewoon maar mogelijk</option>
+        <option value="1">1 – Gering (nauwelijks)</option>
+        <option value="0.5">0,5 – Vrijwel onmogelijk</option>
+        <option value="0.2">0,2 – Praktisch ondenkbaar</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="lbl">B – Blootstelling</label>
+      <p class="hint" style="margin-bottom:6px">Hoe frequent vindt de activiteit plaats</p>
+      <select id="b_waarde" onchange="berekenRisico()">
+        <option value="">— Selecteer —</option>
+        <option value="10">10 – Continue blootstelling</option>
+        <option value="6">6 – Dagelijks</option>
+        <option value="3">3 – Wekelijks / regelmatig</option>
+        <option value="2">2 – Maandelijks</option>
+        <option value="1">1 – Jaarlijks</option>
+        <option value="0.5">0,5 – Zeldzaam</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="lbl">E – Ernst van de gevolgen</label>
+      <p class="hint" style="margin-bottom:6px">Ergst denkbaar gevolg bij dit type incident</p>
+      <select id="e_waarde" onchange="berekenRisico()">
+        <option value="">— Selecteer —</option>
+        <option value="100">100 – Catastrofaal (vele doden)</option>
+        <option value="40">40 – Ramp (enkele doden)</option>
+        <option value="15">15 – Zeer ernstig (1 dode)</option>
+        <option value="7">7 – Ernstig (blijvende AO)</option>
+        <option value="3">3 – Belangrijk (tijdelijke AO)</option>
+        <option value="1">1 – Merkbaar (EHBO ter plaatse)</option>
+      </select>
+    </div>
+
+    <div class="risico-result">
+      <div class="risico-result-header" id="risico_header">Vul alle drie parameters in</div>
+      <div class="risico-result-body">
+        <div class="risico-nr" id="risico_nr">—</div>
+        <div>
+          <div id="risico_formule" style="font-size:12px;color:#888;margin-bottom:4px">W × B × E = R</div>
+          <div class="risico-omschrijving" id="risico_klasse">Selecteer W, B en E om het risicogetal te berekenen</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legenda-strip" style="margin-top:14px">
+      <div class="leg" style="background:#228B22">R&lt;20<br>Aanvaard-baar</div>
+      <div class="leg" style="background:#B8860B">20–69<br>Aandacht</div>
+      <div class="leg" style="background:#CC6600">70–199<br>Substantieel</div>
+      <div class="leg" style="background:#CC0000">200–399<br>Hoog</div>
+      <div class="leg" style="background:#8B0000">≥400<br>STOP</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: MEDISCH -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">6 · Medische opvolging &amp; getuigen</div>
+  <div class="card-body">
+    <div class="info-box">
+      ℹ️ Indien verzorging door de dokter noodzakelijk is, moet het FM voor de AO-verzekering meegegeven worden om te laten invullen door de behandelende arts.
+    </div>
+    <div class="field">
+      <label class="lbl">Naam getuige(n)</label>
+      <input type="text" id="getuigen" placeholder="Naam getuige 1, Naam getuige 2…">
+    </div>
+    <div class="field">
+      <label class="lbl">EHBO-hulp ter plaatse door</label>
+      <input type="text" id="ehbo_door" placeholder="Naam / functie">
+    </div>
+    <div class="field">
+      <label class="lbl">Behandeld door dokter</label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="dokter" value="Ja"><span>Ja</span></label>
+        <label class="radio-opt"><input type="radio" name="dokter" value="Nee" checked=""><span>Nee</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Weggevoerd naar ziekenhuis</label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="ziekenhuis" value="Ja"><span>Ja</span></label>
+        <label class="radio-opt"><input type="radio" name="ziekenhuis" value="Nee" checked=""><span>Nee</span></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: GEVOLGEN -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">7 · Gevolgen van het incident</div>
+  <div class="card-body">
+    <div class="field">
+      <label class="lbl">Type gevolg</label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="werkverzuim" value="Geen werkverzuim"><span>Geen werkverzuim</span></label>
+        <label class="radio-opt"><input type="radio" name="werkverzuim" value="Voorlopig werkverlet"><span>Voorlopig werkverlet</span></label>
+        <label class="radio-opt"><input type="radio" name="werkverzuim" value="Schier-ongeval / near-miss"><span>Schier-ongeval / near-miss</span></label>
+        <label class="radio-opt"><input type="radio" name="werkverzuim" value="Brand / explosie"><span>Brand / explosie</span></label>
+        <label class="radio-opt"><input type="radio" name="werkverzuim" value="Materiële schade"><span>Materiële schade (geen letsel)</span></label>
+      </div>
+    </div>
+    <div id="werkverlet_rij" style="display:none" class="field">
+      <label class="lbl">Werkverlet periode</label>
+      <div class="row2">
+        <div class="field">
+          <label class="lbl" style="font-size:10px">Van</label>
+          <input type="date" id="werkverlet_van">
+        </div>
+        <div class="field">
+          <label class="lbl" style="font-size:10px">Tot en met</label>
+          <input type="date" id="werkverlet_tem">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: LETSEL PLAATS -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">8 · Plaats van het letsel</div>
+  <div class="card-body">
+    <div class="field">
+      <div class="check-grid-2">
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Hoofd"><span>Hoofd</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Gelaat"><span>Gelaat</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Ogen – Links"><span>Ogen L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Ogen – Rechts"><span>Ogen R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Knie – Links"><span>Knie L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Knie – Rechts"><span>Knie R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Benen – Links"><span>Benen L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Benen – Rechts"><span>Benen R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Enkel – Links"><span>Enkel L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Enkel – Rechts"><span>Enkel R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Rug"><span>Rug</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Romp"><span>Romp</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Schouder – Links"><span>Schouder L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Schouder – Rechts"><span>Schouder R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Armen – Links"><span>Armen L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Armen – Rechts"><span>Armen R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Pols – Links"><span>Pols L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Pols – Rechts"><span>Pols R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Vinger / Duim"><span>Vinger / Duim</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Hand – Links"><span>Hand L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Hand – Rechts"><span>Hand R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Voet – Links"><span>Voet L</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Voet – Rechts"><span>Voet R</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_plaats" value="Geen letsel"><span>Geen letsel</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Andere / toelichting</label>
+      <input type="text" id="letsel_plaats_andere" placeholder="Specificeer indien nodig…">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: LETSEL AARD -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">9 · Aard van het letsel</div>
+  <div class="card-body">
+    <div class="field">
+      <div class="check-grid-2">
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Snijwonde"><span>Snijwonde</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Schaafwonde"><span>Schaafwonde</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Verstuiking"><span>Verstuiking</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Open wonde"><span>Open wonde</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Kneuzing"><span>Kneuzing</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Bewusteloos"><span>Bewusteloos</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Breuk"><span>Breuk</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Vergiftiging"><span>Vergiftiging</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Overbelasting"><span>Overbelasting</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Bedwelming"><span>Bedwelming</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Brandwonde"><span>Brandwonde</span></label>
+        <label class="check-opt"><input type="checkbox" name="letsel_aard" value="Geen letsel"><span>Geen letsel</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Andere / toelichting</label>
+      <input type="text" id="letsel_aard_andere" placeholder="Specificeer indien nodig…">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: OORZAAK TYPE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">10 · Oorzaak / voorwerp van het incident</div>
+  <div class="card-body">
+    <div class="field">
+      <div class="check-list">
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Gestruikeld / uitgegleden"><span>Gestruikeld / uitgegleden</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Gevallen"><span>Gevallen</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Verkeerde beweging"><span>Verkeerde beweging</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Beklemd / meegetrokken"><span>Beklemd geraakt / meegetrokken</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Aanstoten / vallen op"><span>Aanstoten / vallen op</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Verlies van controle"><span>Verlies van controle</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Misstapt / in opening getrapt"><span>Misstapt / in opening getrapt</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Elektrisering"><span>Elektrisering</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Stofontwikkeling"><span>Stofontwikkeling</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Gaswolk / dampen"><span>Gaswolk / dampen</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Brand / Explosie"><span>Brand / Explosie</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Elektrisch handgereedschap"><span>Elektrisch (hand)gereedschap</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Machines / Installatie"><span>Machines / Installatie (+ onderdelen)</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Laadkaai / trailer"><span>Laadkaai / trailer</span></label>
+        <label class="check-opt"><input type="checkbox" name="oorzaak_type" value="Materiaal / deel van het product"><span>Materiaal, deel van het product</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Andere / toelichting</label>
+      <input type="text" id="oorzaak_type_andere" placeholder="Specificeer indien nodig…">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: MAATREGELEN + FOTO -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">11 · Onmiddellijke maatregelen / preventie</div>
+  <div class="card-body">
+    <div class="field">
+      <label class="lbl">Wat werd reeds gedaan of zal onmiddellijk gebeuren?</label>
+      <textarea id="maatregelen" placeholder="Beschrijf de reeds genomen of geplande maatregelen…" rows="5"></textarea>
+    </div>
+    <div class="field">
+      <label class="lbl">📷 Foto's bij maatregelen</label>
+      <div class="foto-zone">
+        <div class="foto-upload-btn">
+          <input type="file" id="foto_maatregelen" accept="image/*" multiple="" capture="environment" onchange="handleFoto(this,&#39;prev_maatregelen&#39;)">
+          <div class="foto-zone-inner">
+            <div class="foto-icon">📸</div>
+            <p>Tik om foto te nemen of te kiezen</p>
+            <small>Situatie ná maatregelen</small>
+          </div>
+        </div>
+        <div class="foto-preview" id="prev_maatregelen"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SECTIE: AANVULLING PA + FOTO -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">12 · Aanvulling Preventieadviseur (PA)</div>
+  <div class="card-body">
+    <div class="field">
+      <label class="lbl">Opmerkingen / aanbevelingen PA</label>
+      <textarea id="aanvulling_pa" placeholder="In te vullen door de Preventieadviseur…" rows="5"></textarea>
+    </div>
+    <div class="field">
+      <label class="lbl">📷 Foto's PA</label>
+      <div class="foto-zone">
+        <div class="foto-upload-btn">
+          <input type="file" id="foto_pa" accept="image/*" multiple="" capture="environment" onchange="handleFoto(this,&#39;prev_pa&#39;)">
+          <div class="foto-zone-inner">
+            <div class="foto-icon">🔍</div>
+            <p>Tik om foto toe te voegen</p>
+            <small>Aanvullende foto's voor dossier</small>
+          </div>
+        </div>
+        <div class="foto-preview" id="prev_pa"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- EMAIL VERZENDEN -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="email-card">
+  <div class="card-header">✉️ Verstuur melding per e-mail</div>
+  <div class="card-body">
+
+    <div class="field">
+      <label class="lbl">Vaste ontvangers (TO)</label>
+      <div class="to-tags">
+        <div class="to-tag">🔒 Tom Schietgat &lt;tom.schietgat@praesidiad.com&gt;</div>
+        <div class="to-tag">🔒 Kurt Dierick &lt;kurt.dierick@praesidiad.com&gt;</div>
+      </div>
+      <p class="hint">Uw e-mailadres (invuller) wordt automatisch in CC gezet.</p>
+    </div>
+
+    <div class="field">
+      <label class="lbl">Bijkomende CC-adressen</label>
+      <div class="cc-tags-wrap" id="cc_tags"></div>
+      <div class="add-cc-row">
+        <input type="email" id="cc_input" placeholder="cc@praesidiad.com" inputmode="email">
+        <button type="button" class="btn-sm" onclick="voegCCtoe()">+ CC</button>
+      </div>
+      <p class="hint">Bv. afdelingshoofd, HR, verzekering, directie…</p>
+    </div>
+
+    <div class="field">
+      <label class="lbl">Onderwerp</label>
+      <input type="text" id="email_onderwerp" placeholder="Wordt automatisch ingevuld…">
+    </div>
+
+    <div class="field">
+      <label class="lbl">Extra bericht (optioneel)</label>
+      <textarea id="email_extra" rows="3" placeholder="Extra toelichting bij de e-mail…"></textarea>
+    </div>
+
+    <button type="button" class="btn-main btn-email" onclick="verstuurEmail()">
+      ✉️ Stuur melding e-mail
+    </button>
+    <button type="button" class="btn-main btn-print" onclick="window.print()">
+      🖨️ Afdrukken / PDF
+    </button>
+    <button type="button" class="btn-main btn-reset" onclick="resetFormulier()">
+      🔄 Formulier wissen
+    </button>
+
+    <p class="hint" style="text-align:center;margin-top:6px">
+      ℹ️ Uw mail-app opent met alle gegevens als tekst.<br>Voeg foto's <strong>manueel als bijlage</strong> toe vóór het verzenden.
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:20px 16px;font-size:11px;color:#888;line-height:1.7">
+  FM 100313 · Betafence Belgium NV / Praesidiad Group<br>
+  Opst.: K. Dierick · Goedgekeurd: Messelis T.<br>
+  Vorige uitgave: 20/09/2024
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ─── INIT ─────────────────────────────────────────────────────
+document.getElementById('vandaag-header').textContent = new Date().toLocaleDateString('nl-BE');
+document.getElementById('invuldatum').value = new Date().toISOString().split('T')[0];
+
+// ─── PROGRESS ─────────────────────────────────────────────────
+function updateProgress() {
+  const fields = document.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], input[type="time"], textarea, select');
+  let gevuld = 0;
+  fields.forEach(f => { if (f.value && f.value.trim()) gevuld++; });
+  const pct = Math.min(100, Math.round((gevuld / fields.length) * 100));
+  document.getElementById('progress').style.width = pct + '%';
+}
+document.addEventListener('input', updateProgress);
+document.addEventListener('change', updateProgress);
+
+// ─── WERKVERLET TOGGLE ─────────────────────────────────────────
+document.querySelectorAll('input[name="werkverzuim"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const rij = document.getElementById('werkverlet_rij');
+    rij.style.display = (r.value === 'Voorlopig werkverlet' && r.checked) ? 'block' : 'none';
+    updateOnderwerp();
+  });
+});
+
+// ─── CHECKBOX HIGHLIGHT ───────────────────────────────────────
+document.querySelectorAll('.check-opt input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    cb.closest('.check-opt').classList.toggle('checked', cb.checked);
+  });
+});
+
+// ─── KINNEY RISICO ────────────────────────────────────────────
+function berekenRisico() {
+  const w = parseFloat(document.getElementById('w_waarde').value) || 0;
+  const b = parseFloat(document.getElementById('b_waarde').value) || 0;
+  const e = parseFloat(document.getElementById('e_waarde').value) || 0;
+  const nr = document.getElementById('risico_nr');
+  const header = document.getElementById('risico_header');
+  const klasse = document.getElementById('risico_klasse');
+  const formule = document.getElementById('risico_formule');
+
+  if (!w || !b || !e) {
+    nr.textContent = '—'; nr.style.color = '#999';
+    header.style.background = '#999';
+    header.textContent = 'Vul alle drie parameters in';
+    klasse.textContent = 'Selecteer W, B en E';
+    formule.textContent = 'W × B × E = R';
+    return;
+  }
+  const R = Math.round(w * b * e * 10) / 10;
+  nr.textContent = R;
+  formule.textContent = `${w} × ${b} × ${e} = ${R}`;
+
+  let kleur, tekst, headerTekst;
+  if (R < 20) {
+    kleur = '#228B22'; tekst = '✅ Aanvaardbaar risico – geen prioritaire actie vereist'; headerTekst = 'R < 20 – AANVAARDBAAR';
+  } else if (R < 70) {
+    kleur = '#B8860B'; tekst = '⚠️ Aandacht vereist – actie op middellange termijn'; headerTekst = `R ${R} – AANDACHT VEREIST`;
+  } else if (R < 200) {
+    kleur = '#CC6600'; tekst = '🔶 Substantieel risico – actie op korte termijn vereist'; headerTekst = `R ${R} – SUBSTANTIEEL RISICO`;
+  } else if (R < 400) {
+    kleur = '#CC0000'; tekst = '🔴 Hoog risico – onmiddellijke actie vereist'; headerTekst = `R ${R} – HOOG RISICO`;
+  } else {
+    kleur = '#8B0000'; tekst = '⛔ Extreem risico – STOP activiteit onmiddellijk'; headerTekst = `R ${R} – EXTREEM / STOP`;
+  }
+  nr.style.color = kleur;
+  header.style.background = kleur;
+  header.textContent = headerTekst;
+  klasse.textContent = tekst;
+}
+
+// ─── FOTO UPLOAD ──────────────────────────────────────────────
+function updateFotoGrid(preview) {
+  const n = preview.children.length;
+  if (n === 0) { preview.style.gridTemplateColumns = ''; return; }
+  // 1 foto  → 1 kolom
+  // 2 foto's → 2 kolommen
+  // 3–4     → 2 kolommen (2×2)
+  // 5–6     → 3 kolommen
+  // 7+      → 3 kolommen
+  const cols = n === 1 ? 1 : n <= 4 ? 2 : 3;
+  preview.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+}
+
+function handleFoto(input, previewId) {
+  const preview = document.getElementById(previewId);
+  const files = Array.from(input.files).filter(f => f.type.startsWith('image/'));
+  let loaded = 0;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const wrap = document.createElement('div');
+      wrap.className = 'foto-item';
+      const img = document.createElement('img');
+      img.src = ev.target.result;
+      img.title = file.name;
+      const btn = document.createElement('button');
+      btn.className = 'rm-foto';
+      btn.textContent = '×';
+      btn.setAttribute('aria-label', 'Verwijder foto');
+      btn.onclick = () => { wrap.remove(); updateFotoGrid(preview); };
+      wrap.appendChild(img);
+      wrap.appendChild(btn);
+      preview.appendChild(wrap);
+      loaded++;
+      if (loaded === files.length) updateFotoGrid(preview);
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+
+// ─── CC TAGS ─────────────────────────────────────────────────
+let ccAdressen = [];
+function voegCCtoe() {
+  const inp = document.getElementById('cc_input');
+  const adres = inp.value.trim().replace(/,/g,'');
+  if (!adres || !adres.includes('@')) { toonToast('⚠️ Ongeldig e-mailadres'); return; }
+  if (ccAdressen.includes(adres)) { inp.value = ''; return; }
+  ccAdressen.push(adres);
+  const tag = document.createElement('span');
+  tag.className = 'cc-tag';
+  tag.innerHTML = `${adres} <button onclick="verwijderCC('${adres}',this)">×</button>`;
+  document.getElementById('cc_tags').appendChild(tag);
+  inp.value = '';
+  inp.focus();
+}
+document.getElementById('cc_input').addEventListener('keydown', ev => {
+  if (ev.key === 'Enter' || ev.key === ',') { ev.preventDefault(); voegCCtoe(); }
+});
+function verwijderCC(adres, btn) {
+  ccAdressen = ccAdressen.filter(a => a !== adres);
+  btn.parentElement.remove();
+}
+
+// ─── ONDERWERP ────────────────────────────────────────────────
+function updateOnderwerp() {
+  const datum = document.getElementById('datum_ongeval').value || 'onbekend';
+  const afd = document.getElementById('afdeling').value || 'onbekende afdeling';
+  const so = document.getElementById('naam_so').value;
+  const soStr = so ? ` – ${so}` : '';
+  const gevolg = document.querySelector('input[name="werkverzuim"]:checked');
+  const gevStr = gevolg ? ` (${gevolg.value})` : '';
+  document.getElementById('email_onderwerp').value =
+    `[FM100313] Melding incident – ${datum} – ${afd}${soStr}${gevStr}`;
+}
+['datum_ongeval','afdeling','naam_so'].forEach(id =>
+  document.getElementById(id).addEventListener('input', updateOnderwerp)
+);
+updateOnderwerp();
+
+// ─── EMAIL TEKST OPBOUWEN ─────────────────────────────────────
+function g(id) { return (document.getElementById(id)||{}).value || '—'; }
+function gChecked(naam) {
+  const items = [...document.querySelectorAll(`input[name="${naam}"]:checked`)];
+  return items.length ? items.map(i => i.value).join(', ') : '—';
+}
+function radio(naam) {
+  const el = document.querySelector(`input[name="${naam}"]:checked`);
+  return el ? el.value : '—';
+}
+
+function bouwEmailTekst() {
+  const w = document.getElementById('w_waarde').value;
+  const b = document.getElementById('b_waarde').value;
+  const e = document.getElementById('e_waarde').value;
+  const R = (w && b && e) ? Math.round(parseFloat(w)*parseFloat(b)*parseFloat(e)*10)/10 : '—';
+  const rKlasse = document.getElementById('risico_klasse').textContent;
+
+  return `MELDING & ONDERZOEK VAN INCIDENTEN EN ONGEVALLEN – FM 100313
+Betafence Belgium NV / Praesidiad Group
+${'='.repeat(58)}
+
+INVULLER: ${g('invuller_naam')} <${g('invuller_email')}>
+Datum invullen: ${g('invuldatum')}
+
+─── 1. BASISGEGEVENS ──────────────────────────────────────────
+Datum incident:      ${g('datum_ongeval')}
+Uur incident:        ${g('uur_ongeval')}
+Uur melding:         ${g('uur_melding')}
+Naam SO:             ${g('naam_so')}
+Naam TL:             ${g('naam_tl')}
+Statuut:             ${radio('statuut')}
+Afdeling:            ${g('afdeling')}
+Plaats incident:     ${g('plaats_incident')}
+
+─── 2. OMSCHRIJVING ───────────────────────────────────────────
+1. Situatie voor incident:
+${g('situatie_voor')}
+
+2. Wat ging er mis:
+${g('wat_misging')}
+
+3. Gevolg:
+${g('gevolg_beschrijving')}
+
+─── 3. OORZAKEN ───────────────────────────────────────────────
+MENS:         ${g('oorzaak_mens')}
+UITRUSTING:   ${g('oorzaak_uitrusting')}
+OMGEVING:     ${g('oorzaak_omgeving')}
+PRODUKT:      ${g('oorzaak_produkt')}
+ORGANISATIE:  ${g('oorzaak_organisatie')}
+
+─── 4. RISICOBEOORDELING Kinney (W × B × E = R) ───────────────
+W (Waarschijnlijkheid): ${w || '—'}
+B (Blootstelling):      ${b || '—'}
+E (Ernst):              ${e || '—'}
+Resultaat R:            ${R}
+Klasse: ${rKlasse}
+
+─── 5. MEDISCHE OPVOLGING ─────────────────────────────────────
+Getuige(n):        ${g('getuigen')}
+EHBO ter plaatse:  ${g('ehbo_door')}
+Dokter:            ${radio('dokter')}
+Ziekenhuis:        ${radio('ziekenhuis')}
+
+─── 6. GEVOLGEN ───────────────────────────────────────────────
+Type:              ${radio('werkverzuim')}
+Werkverlet van:    ${g('werkverlet_van')}
+Werkverlet t.e.m.: ${g('werkverlet_tem')}
+
+─── 7. LETSEL ─────────────────────────────────────────────────
+Plaats:  ${gChecked('letsel_plaats')} ${g('letsel_plaats_andere')}
+Aard:    ${gChecked('letsel_aard')} ${g('letsel_aard_andere')}
+
+─── 8. OORZAAK / VOORWERP ─────────────────────────────────────
+${gChecked('oorzaak_type')} ${g('oorzaak_type_andere')}
+
+─── 9. DATUM/UUR VERSLAG ──────────────────────────────────────
+${g('datum_verslag')}
+
+─── 10. ONMIDDELLIJKE MAATREGELEN ─────────────────────────────
+${g('maatregelen')}
+
+─── 11. AANVULLING PA ─────────────────────────────────────────
+${g('aanvulling_pa')}
+${(() => { const x = g('email_extra'); return x !== '—' ? `\n─── EXTRA BERICHT ──────────────────────────────────────────\n${x}\n` : ''; })()}
+${'─'.repeat(58)}
+⚠️ Foto's zijn niet bijgevoegd als bijlage – voeg deze manueel toe.
+Auto-gegenereerd via FM100313 webformulier – Betafence Belgium NV`;
+}
+
+// ─── VERSTUUR EMAIL ───────────────────────────────────────────
+function verstuurEmail() {
+  const email = document.getElementById('invuller_email').value.trim();
+  if (!email || !email.includes('@')) {
+    toonToast('⚠️ Vul eerst uw e-mailadres in (boven)');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    return;
+  }
+  if (!document.getElementById('datum_ongeval').value) {
+    toonToast('⚠️ Vul minstens de datum van het incident in');
+    return;
+  }
+  const to = 'tom.schietgat@praesidiad.com,kurt.dierick@praesidiad.com';
+  const cc = [email, ...ccAdressen].join(',');
+  const onderwerp = document.getElementById('email_onderwerp').value || '[FM100313] Melding incident';
+  const body = bouwEmailTekst();
+  window.location.href = `mailto:${to}?cc=${encodeURIComponent(cc)}&subject=${encodeURIComponent(onderwerp)}&body=${encodeURIComponent(body)}`;
+  setTimeout(() => toonToast('✅ Mail-app geopend. Voeg foto\'s toe als bijlage!'), 800);
+}
+
+// ─── RESET ────────────────────────────────────────────────────
+function resetFormulier() {
+  if (!confirm('Volledig formulier wissen?')) return;
+  document.querySelectorAll('input[type="text"],input[type="email"],input[type="date"],input[type="time"],input[type="datetime-local"],textarea,select').forEach(el => el.value = '');
+  document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(el => { el.checked = false; });
+  document.querySelectorAll('.check-opt').forEach(el => el.classList.remove('checked'));
+  ['prev_situatie','prev_maatregelen','prev_pa'].forEach(id => {
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    el.style.gridTemplateColumns = '';
+  });
+  document.getElementById('cc_tags').innerHTML = '';
+  ccAdressen = [];
+  document.getElementById('werkverlet_rij').style.display = 'none';
+  berekenRisico();
+  document.getElementById('invuldatum').value = new Date().toISOString().split('T')[0];
+  updateOnderwerp();
+  updateProgress();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  toonToast('🔄 Formulier gewist');
+}
+
+// ─── TOAST ────────────────────────────────────────────────────
+function toonToast(bericht) {
+  const t = document.getElementById('toast');
+  t.textContent = bericht;
+  t.style.display = 'block';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.display = 'none'; }, 4000);
+}
+</script>
+
+
+</body></html>

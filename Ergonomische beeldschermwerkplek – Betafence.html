@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://phenomenal-sherbet-83f839.netlify.app/ -->
+<html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style data-merge-styles="true"></style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Ergonomische beeldschermwerkplek – Betafence</title>
+
+<!-- ── PWA ── -->
+<link rel="manifest" href="https://phenomenal-sherbet-83f839.netlify.app/betafence-ergonomie.webmanifest">
+<meta name="theme-color" content="#1F3864">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BF Ergonomie">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 192 192&#39;%3E%3Crect width=&#39;192&#39; height=&#39;192&#39; rx=&#39;32&#39; fill=&#39;%231F3864&#39;/%3E%3Crect x=&#39;0&#39; y=&#39;148&#39; width=&#39;192&#39; height=&#39;44&#39; fill=&#39;%232E5FA3&#39;/%3E%3Ctext x=&#39;96&#39; y=&#39;110&#39; font-family=&#39;Arial&#39; font-weight=&#39;bold&#39; font-size=&#39;80&#39; fill=&#39;white&#39; text-anchor=&#39;middle&#39;%3EBF%3C/text%3E%3Ctext x=&#39;96&#39; y=&#39;180&#39; font-family=&#39;Arial&#39; font-size=&#39;28&#39; fill=&#39;%23DCE9F5&#39; text-anchor=&#39;middle&#39;%3EErgonomie%3C/text%3E%3C/svg%3E">
+<style>
+  /* ── Reset & base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    color: #1a1a1a;
+    min-height: 100vh;
+  }
+
+  /* ── Betafence brand ── */
+  :root {
+    --bf-dark:  #1F3864;
+    --bf-mid:   #2E5FA3;
+    --bf-light: #DCE9F5;
+    --bf-line:  #153D63;
+    --bf-grey:  #D9D9D9;
+    --green:    #1a8a55;
+    --green-bg: #eaf7f1;
+    --amber:    #b07800;
+    --amber-bg: #fff8e6;
+    --red:      #c0392b;
+    --red-bg:   #fdf0f0;
+    --radius:   10px;
+    --shadow:   0 2px 12px rgba(31,56,100,0.10);
+  }
+
+  /* ── Layout ── */
+  .app-shell {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  /* ── Header ── */
+  .bf-header {
+    background: var(--bf-dark);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .bf-wordmark {
+    background: var(--bf-mid);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  .bf-header-text h1 {
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1.3;
+  }
+  .bf-header-text p {
+    color: #a8c4e5;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  /* ── Tabs ── */
+  .tab-nav {
+    background: #e8eef6;
+    display: flex;
+    border-bottom: 2px solid var(--bf-light);
+    overflow-x: auto;
+  }
+  .tab-btn {
+    padding: 11px 18px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    color: #555;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: var(--bf-mid); }
+  .tab-btn.active {
+    color: var(--bf-dark);
+    border-bottom-color: var(--bf-mid);
+    background: #fff;
+  }
+  .tab-icon { font-size: 16px; }
+
+  /* ── Panel ── */
+  .tab-panel { display: none; background: #fff; border-radius: 0 0 var(--radius) var(--radius); box-shadow: var(--shadow); }
+  .tab-panel.active { display: block; }
+  .panel-inner { padding: 1.25rem 1.5rem 1.5rem; }
+
+  /* ── Step cards ── */
+  .step-card {
+    border: 1px solid var(--bf-light);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .step-header {
+    background: var(--bf-dark);
+    color: #fff;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .step-badge {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--bf-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: bold; flex-shrink: 0;
+  }
+  .step-header h2 { font-size: 15px; }
+  .step-body { padding: 4px 16px 12px; }
+  .step-item {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: flex-start;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--bf-mid); flex-shrink: 0; margin-top: 6px;
+  }
+  .step-item strong { color: var(--bf-dark); }
+
+  /* ── Tip box ── */
+  .tip-box {
+    background: var(--bf-light);
+    border-left: 4px solid var(--bf-mid);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--bf-dark);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  /* ── Zelfcheck ── */
+  .score-bar-wrap {
+    background: #f5f8fc;
+    border-radius: var(--radius);
+    border: 1px solid var(--bf-light);
+    padding: 14px 18px;
+    margin-bottom: 1rem;
+  }
+  .score-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 6px;
+  }
+  .score-track {
+    height: 10px; background: #ddd; border-radius: 5px; overflow: hidden;
+  }
+  .score-fill {
+    height: 100%; border-radius: 5px;
+    transition: width 0.4s, background 0.4s;
+    background: var(--green); width: 0%;
+  }
+  .score-msg {
+    margin-top: 8px; font-size: 13px; font-weight: bold; color: #888;
+  }
+
+  .result-box {
+    border-radius: var(--radius);
+    border: 1px solid;
+    padding: 14px 18px;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .result-box.good { background: var(--green-bg); border-color: var(--green); }
+  .result-box.warn { background: var(--amber-bg); border-color: #e5a000; }
+  .result-box.bad  { background: var(--red-bg);   border-color: var(--red); }
+  .result-icon { font-size: 22px; flex-shrink: 0; line-height: 1.2; }
+  .result-box h3 { font-size: 14px; margin-bottom: 4px; }
+  .result-box p  { font-size: 13px; line-height: 1.5; color: #444; }
+  .result-box.good h3 { color: #155a36; }
+  .result-box.warn h3 { color: #7a5200; }
+  .result-box.bad  h3 { color: #8a2020; }
+
+  .check-section { margin-bottom: 1.2rem; }
+  .section-title {
+    font-size: 11px; font-weight: bold; color: #777;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    padding-bottom: 6px; margin-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px;
+    background: #fafbfc;
+    border: 1px solid #e8eef6;
+    border-radius: 7px;
+    margin-bottom: 6px;
+    transition: background 0.15s;
+  }
+  .check-item.ok  { background: #eaf7f1; border-color: #1a8a55; }
+  .check-item.nok { background: #fdf0f0; border-color: #c0392b; }
+
+  .cat-badge {
+    font-size: 10px; font-weight: bold; color: #fff;
+    background: var(--bf-mid); border-radius: 4px;
+    padding: 3px 8px; flex-shrink: 0;
+    min-width: 70px; text-align: center;
+  }
+  .check-q {
+    font-size: 13px; flex: 1; line-height: 1.4;
+  }
+  .check-btns { display: flex; gap: 6px; flex-shrink: 0; }
+  .btn-ja, .btn-nok {
+    font-family: Arial, sans-serif;
+    font-size: 11px; font-weight: bold;
+    padding: 5px 10px; border-radius: 5px;
+    border: 1.5px solid; cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .btn-ja  { border-color: #1a8a55; color: #1a8a55; background: #fff; }
+  .btn-nok { border-color: #c0392b; color: #c0392b; background: #fff; }
+  .btn-ja.active  { background: #1a8a55; color: #fff; }
+  .btn-nok.active { background: #c0392b; color: #fff; }
+
+  .reset-btn {
+    font-family: Arial, sans-serif;
+    background: var(--bf-dark); color: #fff; border: none;
+    padding: 10px 20px; border-radius: 6px;
+    font-size: 13px; font-weight: bold; cursor: pointer;
+    margin-top: 0.5rem;
+  }
+  .reset-btn:hover { background: var(--bf-mid); }
+
+  /* ── Risico tabel ── */
+  .risk-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .risk-table th {
+    background: var(--bf-dark); color: #fff;
+    padding: 9px 12px; text-align: left; font-size: 12px;
+  }
+  .risk-table td { padding: 9px 12px; vertical-align: top; line-height: 1.4; }
+  .risk-table tr:nth-child(odd) td  { background: #f5f8fc; }
+  .risk-table tr:nth-child(even) td { background: #fff; }
+  .risk-table td:first-child { font-weight: bold; color: var(--bf-dark); }
+  .risk-table tr { border-bottom: 1px solid #e0e8f5; }
+
+  /* ── Contact ── */
+  .contact-card {
+    background: #f5f8fc;
+    border: 1px solid var(--bf-light);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-bottom: 1rem;
+  }
+  .contact-card h3 { font-size: 15px; color: var(--bf-dark); margin-bottom: 10px; }
+  .contact-row { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; font-size: 13.5px; }
+  .contact-label { font-size: 11px; color: #888; }
+  .contact-ico { font-size: 18px; color: var(--bf-mid); flex-shrink: 0; width: 22px; }
+
+  /* ── Wanneer vragen ── */
+  .when-list { list-style: none; }
+  .when-list li {
+    display: flex; gap: 8px; align-items: flex-start;
+    padding: 7px 0; font-size: 13.5px; line-height: 1.4;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .when-list li:last-child { border-bottom: none; }
+  .when-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--bf-mid); flex-shrink: 0; margin-top: 5px;
+  }
+
+  /* ── Footer ── */
+  .app-footer {
+    background: var(--bf-dark);
+    color: #a8c4e5;
+    font-size: 11px;
+    padding: 10px 18px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid var(--bf-mid);
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 560px) {
+    .check-item { flex-wrap: wrap; gap: 6px; }
+    .check-q { width: 100%; }
+    .risk-table th:nth-child(2), .risk-table td:nth-child(2) { display: none; }
+    .bf-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+
+  /* Print ── */
+  @media print {
+    body { background: #fff; }
+    .tab-nav, .tab-btn, .reset-btn { display: none; }
+    .tab-panel { display: block !important; box-shadow: none; }
+    .app-shell { padding: 0; }
+    .bf-header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+
+  /* ── PWA install banner ── */
+  #install-banner {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+    background: #1F3864; color: #fff;
+    padding: 12px 16px;
+    align-items: center; gap: 12px;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.25);
+  }
+  #install-banner.show { display: flex; }
+  #install-banner p { flex: 1; font-size: 13px; line-height: 1.4; }
+  #install-banner p strong { color: #DCE9F5; }
+  #btn-install {
+    background: #2E5FA3; color: #fff; border: none;
+    padding: 8px 16px; border-radius: 6px;
+    font-family: Arial, sans-serif; font-size: 13px; font-weight: bold;
+    cursor: pointer; white-space: nowrap;
+  }
+  #btn-dismiss {
+    background: none; border: none; color: #A8C4E5;
+    font-size: 20px; cursor: pointer; padding: 0 4px; line-height: 1;
+  }
+  /* Extra bottom padding so banner doesn't cover content */
+  body.banner-visible { padding-bottom: 72px; }
+</style>
+</head>
+<body>
+
+<!-- ── PWA install banner ── -->
+<div id="install-banner" role="complementary" aria-label="App installeren">
+  <p><strong>Installeer als app</strong><br>Voeg toe aan je startscherm voor snelle toegang — ook offline.</p>
+  <button id="btn-install">Installeer</button>
+  <button id="btn-dismiss" aria-label="Sluiten">✕</button>
+</div>
+
+<div class="app-shell">
+
+  <!-- ── HEADER ── -->
+  <div class="bf-header">
+    <div class="bf-wordmark">BETAFENCE</div>
+    <div class="bf-header-text">
+      <h1>Ergonomische beeldschermwerkplek</h1>
+      <p>Preventiedienst &nbsp;|&nbsp; K. Dierick – Preventieadviseur Niveau II &nbsp;|&nbsp; Betafence Belgium NV</p>
+    </div>
+  </div>
+
+  <!-- ── TAB NAV ── -->
+  <div class="tab-nav" role="tablist" aria-label="Secties">
+    <button class="tab-btn active" role="tab" aria-selected="true" onclick="showTab(&#39;stappen&#39;,this)">
+      <span class="tab-icon">☑</span> 5 stappen
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(&#39;zelfcheck&#39;,this)">
+      <span class="tab-icon">✔</span> Zelfcheck
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(&#39;risicos&#39;,this)">
+      <span class="tab-icon">⚠</span> Risico's
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab(&#39;contact&#39;,this)">
+      <span class="tab-icon">👤</span> Ergonoom
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TAB 1 – 5 STAPPEN                                            -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-stappen" class="tab-panel active" role="tabpanel">
+    <div class="panel-inner">
+
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-badge">1</div>
+          <h2>Bureaustoel</h2>
+        </div>
+        <div class="step-body">
+          <div class="step-item"><div class="step-dot"></div><div><strong>Zithoogte</strong> = knieholtehoogte — bekken op gelijke hoogte met de knieën of iets hoger</div></div>
+          <div class="step-item"><div class="step-dot"></div><div><strong>Voeten</strong> — beide plat op de grond (gebruik een voetsteun indien nodig)</div></div>
+          <div class="step-item"><div class="step-dot"></div><div><strong>Zitdiepte</strong> — handbreedte vrije ruimte tussen voorkant zitting en knieholte</div></div>
+          <div class="step-item"><div class="step-dot"></div><div><strong>Rugleuning</strong> — vult de holle lage rug op; goed instellen voor lumbale steun</div></div>
+          <div class="step-item"><div class="step-dot"></div><div><strong>Armsteunen</strong> — op ellebooghoogte, ellebogen in hoek van 90° met bovenarmen langs lichaam</div></div>
+          <div class="step-item"><div class="step-dot"></div><div><strong>Gewichtsinstelling</strong> — zet de stoel los en stel in via hendel/draaiknop onder of naast de stoel</div></div>
+        </div>
+      </div>
+
+      <div class="tip-box">💡 Een verkeerd ingestelde stoel is één van de meest voorkomende oorzaken van lage rugklachten bij beeldschermwerk. Neem 2 minuten de tijd om je stoel correct in te stellen.</div>
+
+      <div class="step-card">
+        <div class="step-header"><div class="step-badge">2</div><h2>Bureauhoogte</h2></div>
+        <div class="step-body">
+          <div class="step-item"><div class="step-dot"></div><div>Tafelhoogte = <strong>ellebooghoogte in rust</strong> = armsteunhoogte van de stoel</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Zit-sta tafel: instelbaar op ellebooghoogte zowel zittend als staand</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Controleer of schouders ontspannen zijn — geen ophalen of vooroverleunen</div></div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header"><div class="step-badge">3</div><h2>Beeldscherm</h2></div>
+        <div class="step-body">
+          <div class="step-item"><div class="step-dot"></div><div>Beeldscherm <strong>recht voor je</strong> — niet scheef of te ver opzij</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Titelbalk op <strong>ooghoogte</strong> (of net iets eronder)</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Uitzondering: bij multi- of bifocale bril iets lager instellen</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Kijkafstand: <strong>50–70 cm</strong> (armlengte als richtlijn)</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Nooit voor een raam of lichtbron plaatsen — schitteringen vermijden</div></div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header"><div class="step-badge">4</div><h2>Toetsenbord &amp; muis</h2></div>
+        <div class="step-body">
+          <div class="step-item"><div class="step-dot"></div><div>Klap de pootjes van het toetsenbord <strong>in</strong> (vlakke positie)</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Toetsenbord <strong>15 à 20 cm</strong> van de rand van de tafel</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Polsen recht houden — niet steunen op de tafel tijdens het typen</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Muis zo dicht mogelijk naast het toetsenbord; gehele arm bewegen</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Overweeg een verticale muis bij klachten aan pols of onderarm</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Headset of luidspreker bij frequent telefoneren</div></div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header"><div class="step-badge">5</div><h2>Afwisseling &amp; beweging</h2></div>
+        <div class="step-body">
+          <div class="step-item"><div class="step-dot"></div><div>Sta elk <strong>half uur</strong> eens op van je stoel</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Werk regelmatig <strong>rechtstaand</strong> (zit-sta tafel op ellebooghoogte)</div></div>
+          <div class="step-item"><div class="step-dot"></div><div>Telefoneer <strong>al wandelend</strong> met headset of draadloze telefoon</div></div>
+          <div class="step-item"><div class="step-dot"></div><div><strong>20-20-20 oogregel</strong>: elke 20 min → kijk 20 sec naar iets op 6 m afstand</div></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="app-footer">
+      <span>Codex Welzijn op het Werk – Boek VIII, Titel 2</span>
+      <span>Betafence Belgium NV &nbsp;|&nbsp; Intern document</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TAB 2 – ZELFCHECK                                            -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-zelfcheck" class="tab-panel" role="tabpanel">
+    <div class="panel-inner">
+
+      <div class="score-bar-wrap">
+        <div class="score-meta">
+          <span>Jouw score</span>
+          <span id="score-pct">0 / 8 ingevuld</span>
+        </div>
+        <div class="score-track">
+          <div class="score-fill" id="score-fill"></div>
+        </div>
+        <div class="score-msg" id="score-msg">Vul de vragen hieronder in.</div>
+      </div>
+
+      <div id="result-area"></div>
+
+      <!-- STOEL -->
+      <div class="check-section">
+        <div class="section-title">Stoel &amp; houding</div>
+        <div class="check-item" id="ci-0">
+          <span class="cat-badge">Stoel</span>
+          <span class="check-q">Staan mijn voeten plat op de grond (of op een voetsteun)?</span>
+          <div class="check-btns">
+            <button class="btn-ja" id="ja-0" onclick="setAns(0,&#39;ja&#39;)">OK</button>
+            <button class="btn-nok" id="nok-0" onclick="setAns(0,&#39;nok&#39;)">NOK</button>
+          </div>
+        </div>
+        <div class="check-item" id="ci-1">
+          <span class="cat-badge">Stoel</span>
+          <span class="check-q">Zijn mijn knieën en heupen in een hoek van ca. 90°?</span>
+          <div class="check-btns">
+            <button class="btn-ja" id="ja-1" onclick="setAns(1,&#39;ja&#39;)">OK</button>
+            <button class="btn-nok" id="nok-1" onclick="setAns(1,&#39;nok&#39;)">NOK</button>
+          </div>
+        </div>
+        <div class="check-item" id="ci-2">
+          <span class="cat-badge">Stoel</span>
+          <span class="check-q">Ondersteunt de rugleuning mijn lage rug goed?</span>
+          <div class="check-btns">
+            <button class="btn-ja" id="ja-2" onclick="setAns(2,&#39;ja&#39;)">OK</button>
+            <button class="btn-nok" id="nok-2" onclick="setAns(2,&#39;nok&#39;)">NOK</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUREAU -->
+      <div class="check-section">
+        <div class="section-title">Bureau &amp; invoer</div>
+        <div class="check-item" id="ci-3">
+          <span class="cat-badge">Bureau</span>
+          <span class="check-q">Kan ik comfortabel typen met ontspannen schouders en rechte polsen?</span>
+          <div class="check-btns">
+            <button class="btn-ja" id="ja-3" onclick="setAns(3,&#39;ja&#39;)">OK</button>
+            <button class="btn-nok" id="nok-3" onclick="setAns(3,&#39;nok&#39;)">NOK</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHERM -->
+      <div class="check-section">
+        <div class="section-title">Beeldscherm &amp; verlichting</div>
+        <div class="check-item" id="ci-4">
+          <span class="cat-badge">Scherm</span>
+          <span class="check-q">Staat de bovenkant van mijn beeldscherm op ooghoogte?</span>
+          <div class="check-btns">
+            <button class="btn-ja" id="ja-4" onclick="setAns(4,&#39;ja&#39;)">OK</button>
+            <button class="btn-nok" id="nok-4" onclick="setAns(4,&#39;nok&#39;)">NOK</button>
+          </div>
+        </div>
+        <div class="check-item" id="ci-5">
+          <span class="cat-badge">Scherm</span>
+          <span class="check-q">Is de kijkafstand tot het scherm 50–70 cm?</span>
+          <div class="check-btns">
+            <button class="btn-ja" id="ja-5" onclick="setAns(5,&#39;ja&#39;)">OK</button>
+            <button class="btn-nok" id="nok-5" onclick="setAns(5,&#39;nok&#39;)">NOK</button>
+          </div>
+        </div>
+        <div class="check-item" id="ci-6">
+          <span class="cat-badge">Verlichting</span>
+          <span class="check-q">Heb ik geen last van schittering of reflecties op het scherm?</span>
+          <div class="check-btns">
+            <button class="btn-ja" id="ja-6" onclick="setAns(6,&#39;ja&#39;)">OK</button>
+            <button class="btn-nok" id="nok-6" onclick="setAns(6,&#39;nok&#39;)">NOK</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEWEGING -->
+      <div class="check-section">
+        <div class="section-title">Beweging</div>
+        <div class="check-item" id="ci-7">
+          <span class="cat-badge">Beweging</span>
+          <span class="check-q">Sta ik regelmatig op — minstens 1× per half uur?</span>
+          <div class="check-btns">
+            <button class="btn-ja" id="ja-7" onclick="setAns(7,&#39;ja&#39;)">OK</button>
+            <button class="btn-nok" id="nok-7" onclick="setAns(7,&#39;nok&#39;)">NOK</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="reset-btn" onclick="resetCheck()">↺ Opnieuw invullen</button>
+    </div>
+    <div class="app-footer">
+      <span>Codex Welzijn op het Werk – Boek VIII, Titel 2</span>
+      <span>Betafence Belgium NV &nbsp;|&nbsp; Intern document</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TAB 3 – RISICO'S                                             -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-risicos" class="tab-panel" role="tabpanel">
+    <div class="panel-inner">
+      <table class="risk-table" style="border-radius:8px; overflow:hidden;">
+        <thead>
+          <tr>
+            <th style="width:25%">Risicofactor</th>
+            <th style="width:35%">Mogelijke klachten</th>
+            <th style="width:40%">Maatregel / Actie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Langdurig statisch zitten</td>
+            <td>Lage rugpijn, stijfheid, doorbloedingsproblemen</td>
+            <td>Pauzebeheer, zit-sta tafel, 30-min-regel</td>
+          </tr>
+          <tr>
+            <td>Verkeerde schermhoek / afstand</td>
+            <td>Nek- en schouderklachten, hoofdpijn, vermoeide ogen</td>
+            <td>Scherm recht voor, titelbalk op ooghoogte, 50–70 cm afstand</td>
+          </tr>
+          <tr>
+            <td>Onvoldoende verlichting / schitteringen</td>
+            <td>Oogvermoeidheid, hoofdpijn, verhoogde spierspanning</td>
+            <td>Scherm niet voor raam, indirect licht, verduisteringsgordijn</td>
+          </tr>
+          <tr>
+            <td>Herhaalbewegingen pols/hand</td>
+            <td>RSI, tendinitis, carpaal tunnelsyndroom</td>
+            <td>Polssteun, ergonomische muis, regelmatige pauzes</td>
+          </tr>
+          <tr>
+            <td>Hoge taakdruk / laag herstel</td>
+            <td>Mentale vermoeidheid, burn-out risico</td>
+            <td>Pauzeplanning, taakrotatie, voldoende autonomie</td>
+          </tr>
+          <tr>
+            <td>Geen individuele aanpassing</td>
+            <td>Individuele klachten door standaard-instelling</td>
+            <td>Individueel ergonomisch werkplekbezoek aanvragen</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tip-box" style="margin-top:1rem">
+        ℹ️ <strong>Wettelijke basis:</strong> Codex over het Welzijn op het Werk, Boek VIII, Titel 2 (Beeldschermen) verplicht werkgevers een risicoanalyse uit te voeren en passende maatregelen te nemen (art. VIII.2-3). Een vijfjaarlijkse specifieke risicoanalyse is verplicht (art. VIII.2-5).
+      </div>
+    </div>
+    <div class="app-footer">
+      <span>Codex Welzijn op het Werk – Boek VIII, Titel 2</span>
+      <span>Betafence Belgium NV &nbsp;|&nbsp; Intern document</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <!-- TAB 4 – CONTACT ERGONOOM                                     -->
+  <!-- ══════════════════════════════════════════════════════════════ -->
+  <div id="tab-contact" class="tab-panel" role="tabpanel">
+    <div class="panel-inner">
+
+      <div class="contact-card">
+        <h3>Ergonoombezoek aanvragen</h3>
+        <p style="font-size:13px; color:#555; margin-bottom:12px; line-height:1.5">
+          Kan je niet alle vragen in de zelfcheck met <strong>OK</strong> beantwoorden, of heb je klachten?
+          De ergonoom van onze EDPBW komt langs op <strong>dinsdag 15/09/2026</strong> voor een persoonlijk werkplekbezoek.
+        </p>
+        <div class="contact-row">
+          <span class="contact-ico">👤</span>
+          <div>
+            <div>K. Dierick</div>
+            <div class="contact-label">Preventieadviseur – Preventiedienst Betafence Belgium NV, Zwevegem</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-ico">🩺</span>
+          <div>
+            <div>A. Van Severen</div>
+            <div class="contact-label">Ergonoom Liantis (EDPBW) – Werkplekbezoek: di 15/09/2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <h3>Wanneer een ergonoombezoek aanvragen?</h3>
+        <ul class="when-list">
+          <li><div class="when-dot"></div><div>Je hebt klachten aan rug, nek, schouders, pols of ogen</div></li>
+          <li><div class="when-dot"></div><div>Je kan de werkplek niet zelf correct instellen</div></li>
+          <li><div class="when-dot"></div><div>Je werkt meer dan 4 uur per dag aan het beeldscherm</div></li>
+          <li><div class="when-dot"></div><div>Je bent zwanger of hebt een specifieke medische aandoening</div></li>
+          <li><div class="when-dot"></div><div>Na een langdurige afwezigheid of bij een nieuwe werkplek</div></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="app-footer">
+      <span>samen werkt.</span>
+      <span>Betafence Belgium NV &nbsp;|&nbsp; Intern document</span>
+    </div>
+  </div>
+
+</div><!-- /app-shell -->
+
+<script>
+/* ── Tab switching ── */
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+}
+
+/* ── Zelfcheck logic ── */
+const answers = new Array(8).fill(null);
+
+function setAns(idx, val) {
+  answers[idx] = (answers[idx] === val) ? null : val;
+  const ci   = document.getElementById('ci-'  + idx);
+  const bja  = document.getElementById('ja-'  + idx);
+  const bnok = document.getElementById('nok-' + idx);
+  ci.classList.remove('ok','nok');
+  bja.classList.remove('active');
+  bnok.classList.remove('active');
+  if (answers[idx] === 'ja')  { ci.classList.add('ok');  bja.classList.add('active'); }
+  if (answers[idx] === 'nok') { ci.classList.add('nok'); bnok.classList.add('active'); }
+  updateScore();
+}
+
+function updateScore() {
+  const filled = answers.filter(a => a !== null).length;
+  const jas    = answers.filter(a => a === 'ja').length;
+  const noks   = answers.filter(a => a === 'nok').length;
+  const pctEl  = document.getElementById('score-pct');
+  const fill   = document.getElementById('score-fill');
+  const msg    = document.getElementById('score-msg');
+  const ra     = document.getElementById('result-area');
+
+  pctEl.textContent = filled + ' / 8 ingevuld';
+
+  if (filled === 0) {
+    fill.style.width = '0%';
+    fill.style.background = '#1a8a55';
+    msg.style.color = '#888';
+    msg.textContent = 'Vul de vragen hieronder in.';
+    ra.innerHTML = '';
+    return;
+  }
+
+  const barPct = Math.round((jas / 8) * 100);
+  fill.style.width = barPct + '%';
+
+  if (filled < 8) {
+    fill.style.background = '#e5a000';
+    msg.style.color = '#7a5200';
+    msg.textContent = jas + ' van ' + filled + ' ingevulde vragen OK — nog ' + (8 - filled) + ' te gaan.';
+    ra.innerHTML = '';
+    return;
+  }
+
+  /* All 8 answered */
+  if (noks === 0) {
+    fill.style.background = '#1a8a55';
+    msg.style.color = '#155a36';
+    msg.textContent = 'Alle 8 vragen OK — uitstekend!';
+    ra.innerHTML = '<div class="result-box good"><div class="result-icon">✅</div><div><h3>Werkplek correct ingesteld</h3><p>Alle checkpunten zijn OK. Blijf de 30-minuten-regel en de 20-20-20 oogregel toepassen. Bij toekomstige klachten kan je steeds contact opnemen met de ergonoom.</p></div></div>';
+  } else if (noks <= 2) {
+    fill.style.background = '#e5a000';
+    msg.style.color = '#7a5200';
+    msg.textContent = noks + ' punt' + (noks > 1 ? 'en' : '') + ' voor verbetering — aandacht nodig.';
+    ra.innerHTML = '<div class="result-box warn"><div class="result-icon">⚠️</div><div><h3>Enkele aanpassingen nodig</h3><p>Probeer de NOK-punten zelf aan te passen via de 5-stappen-instructie. Lukt het niet, of blijven klachten aanhouden? Ga naar het tabblad "Ergonoom" om een bezoek aan te vragen.</p></div></div>';
+  } else {
+    fill.style.background = '#c0392b';
+    msg.style.color = '#8a2020';
+    msg.textContent = noks + ' punten NOK — ergonoombezoek aanbevolen.';
+    ra.innerHTML = '<div class="result-box bad"><div class="result-icon">🔴</div><div><h3>Ergonoombezoek aanbevolen</h3><p>Meerdere checkpunten zijn niet in orde. Neem contact op met de preventiedienst voor een persoonlijk werkplekbezoek. Wacht niet tot klachten verergeren — ga naar het tabblad "Ergonoom".</p></div></div>';
+  }
+}
+
+function resetCheck() {
+  for (let i = 0; i < 8; i++) {
+    answers[i] = null;
+    document.getElementById('ci-'  + i).classList.remove('ok','nok');
+    document.getElementById('ja-'  + i).classList.remove('active');
+    document.getElementById('nok-' + i).classList.remove('active');
+  }
+  document.getElementById('score-fill').style.width = '0%';
+  document.getElementById('score-fill').style.background = '#1a8a55';
+  document.getElementById('score-pct').textContent = '0 / 8 ingevuld';
+  document.getElementById('score-msg').style.color = '#888';
+  document.getElementById('score-msg').textContent = 'Vul de vragen hieronder in.';
+  document.getElementById('result-area').innerHTML = '';
+}
+
+
+/* ══ PWA: Service Worker registratie ══ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('betafence-ergonomie-sw.js')
+      .then(reg => console.log('SW registered:', reg.scope))
+      .catch(err => console.warn('SW error:', err));
+  });
+}
+
+/* ══ PWA: Install prompt ══ */
+let deferredPrompt = null;
+const banner   = document.getElementById('install-banner');
+const btnInst  = document.getElementById('btn-install');
+const btnDism  = document.getElementById('btn-dismiss');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Only show if not dismissed before
+  if (!localStorage.getItem('pwa-dismissed')) {
+    banner.classList.add('show');
+    document.body.classList.add('banner-visible');
+  }
+});
+
+btnInst.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  banner.classList.remove('show');
+  document.body.classList.remove('banner-visible');
+});
+
+btnDism.addEventListener('click', () => {
+  banner.classList.remove('show');
+  document.body.classList.remove('banner-visible');
+  localStorage.setItem('pwa-dismissed', '1');
+});
+
+window.addEventListener('appinstalled', () => {
+  banner.classList.remove('show');
+  document.body.classList.remove('banner-visible');
+  deferredPrompt = null;
+});
+
+</script>
+
+
+</body></html>
